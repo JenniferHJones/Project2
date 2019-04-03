@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+      
+      <meta name="author" content="">
+      <title>Trade-fy - Responsive Stock Trading User Interface</title>
+     <link rel="stylesheet" href="app/css/bootstrap.css">
+      <link rel="stylesheet" href="plugins/fontawesome/css/font-awesome.css">
+      <link rel="stylesheet" href="plugins/animo/animate%2banimo.css">
+      <link rel="stylesheet" href="plugins/csspinner/csspinner.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+      crossorigin="anonymous">
+      <link rel="stylesheet" href="app/css/app.css">
+      <script src="plugins/modernizr/modernizr.js"></script>
+      <script src="plugins/fastclick/fastclick.js"></script>
+   </head>
+   <body>
+
+      <section class="wrapper">
+         <nav class="navbar navbar-default navbar-top navbar-fixed-top">
+            <div class="navbar-header">
+               <a href="#" class="navbar-brand">
+                  <div class="brand-logo"><i class="fa fa-doller"></i> TRADE-FY</div>
+                  <div class="brand-logo-collapsed"><i class="fa fa-doller"></i></div>
+               </a>
+            </div>
+            <div class="nav-wrapper">
+               
+               <ul class="nav navbar-nav navbar-right mt0">
+                  <li class="dropdown dropdown-list">
+                     <a href="#" data-toggle="dropdown" data-play="bounceIn" class="dropdown-toggle">
+                     <strong><i class="fa fa-btc"></i> Wallet</strong>
+                     </a>
+                  </li>
+                  <li class="dropdown dropdown-list">
+                     <a href="#" data-toggle="dropdown" data-play="bounceIn" class="dropdown-toggle">
+                        <em class="fa fa-bell"></em>
+                        <div class="label label-danger">3</div>
+                     </a>
+                     <ul class="dropdown-menu col-md-4 col-sm-6 col-xs-12">
+                        <li>
+                           <div class="table-responsive">
+                              <table class="table table-striped table-bordered table-hover">
+                                 <thead>
+                                    <tr>
+                                       <th>Buy/Sell</th>
+                                 
+                                       <th>Date</th>
+                                       <th>Status</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr>
+                                       <td>Buy order SC</td>
+                                     
+                                       <td>
+                                          <em class="fa fa-calendar fa-fw text-muted"></em>
+                                       </td>
+                                       <td class="text-center">
+                                          Complete
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Sell order SC</td>
+                                   
+                                       <td>
+                                          <em class="fa fa-calendar fa-fw text-muted"></em>
+                                       </td>
+                                       <td class="text-center">
+                                         
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Buy order AMZN</td>
+                                    
+                                       <td>
+                                          <em class="fa fa-calendar fa-fw text-muted"></em>
+                                       </td>
+                                       <td class="text-center">
+                                         
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="dropdown">
+                     <a href="#" data-toggle="dropdown" data-play="bounceIn" class="dropdown-toggle">
+                     <em class="fa fa-user"></em>
+                     </a>
+                     <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a>
+                        </li>
+                        <li><a href="#">Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#">Logout</a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </div>
+         </nav>
+         <aside class="aside asideBuySell">
+            <nav class="sidebar">
+               <ul class="nav">
+                  <li>
+                     <div class="item user-block has-submenu">
+                        <div class="user-block-picture">
+                           <img src="app/images/user/01.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle account-img-mb">
+                        </div>
+                        <div class="user-block-info">
+                           <span class="user-block-name item-text">Mallika C</span>
+                           <span class="user-block-role"><i class="fa fa-check text-green"></i> Verified</span>
+                           <div class="label label-primary"><i class="fa fa-lock"></i> Logout</div>
+                        </div>
+                     </div>
+                  </li>
+                  <li class="">
+                     <div class="row">
+                     <div class="col-md-12">
+                        <!-- Tabs-->
+                        <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+                         <ul id="myTabs" class="nav nav-tabs nav-tabs-noboder minus-margin-tab" role="tablist">
+                           <li role="presentation" class="active"><a href="#home" class="tab-link-pad" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-gavel"></i> Buy</a></li>
+                           <li role="presentation" class=""><a href="#profile" class="tab-link-pad" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false"><i class="fa fa-bullhorn"></i> Sell</a></li>
+                         </ul>
+                         <div id="myTabContent" class="tab-content tab-content-BuySell">
+                           <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                             <div class="">
+                              <div class="panel-heading">
+                              </div>
+                              <div class="panel-wrapper collapse in h-auto"><div class="pannel panel-body">
+                                 <div class="input-group col-sm-12 m-b">
+                                    <!-- <span class="input-group-addon btn-primary group-btn-hover darkformfield"><i class="fa fa-angle-double-up"></i> Max</span> -->
+                                    <!-- <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
+                                    <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-block">Transaction Type
+                                       <span class="caret"></span>
+                                       </button>
+                                       <ul role="menu" class="dropdown-menu">
+                                          <li><a href="javascript:void(0);">Stock/ETF</a>
+                                          </li>
+                                          <li><a href="javascript:void(0);">Mutual Fund</a>
+                                          </li>
+                                       </ul>
+                                 </div>
+                                 <div class="m-t-9">
+                                    <div class="input-group m-b">
+                                       <div class="input-group-btn">
+                                          <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle">Symbol
+                                          <!-- <span class="caret"></span> -->
+                                          </button>
+                                         
+                                       </div>
+                                       <input type="text" class="form-control text-right" placeholder="search">
+                                    </div>
+                                 </div>
+                                 <div class="m-t-9">
+                                    <div class="input-group m-b">
+                                       <div class="input-group-btn">
+                                          <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle">Quantity
+                                          <!-- <span class="caret"></span> -->
+                                          </button>
+                                         
+                                       </div>
+                                       <input type="text" class="form-control text-right" placeholder="">
+                                    </div>
+                                 </div>
+                                 <div class="m-t-9">
+                                    <div class="input-group m-b">
+                                       <div class="input-group-btn">
+                                          <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle">Price
+                                          <!-- <span class="caret"></span> -->
+                                          </button>
+                                         
+                                       </div>
+                                       <input type="text" class="form-control text-right" placeholder="0000.00">
+                                    </div>
+                                 </div>
+                                
+                                 <div class="row">
+                                    <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
+                                       <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block">Order Type
+                                       <span class="caret"></span>
+                                       </button>
+                                       <ul role="menu" class="dropdown-menu">
+                                          <li><a href="javascript:void(0);">Market Order</a>
+                                          </li>
+                                          <li><a href="javascript:void(0);">Limit Order</a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                    <!-- <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
+                                       <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block">Good 'Till Cancelled
+                                       <span class="caret"></span>
+                                       </button>
+                                       <ul role="menu" class="dropdown-menu">
+                                          <li><a href="javascript:void(0);">Good 'Till Cancelled</a>
+                                          </li>
+                                          <li><a href="javascript:void(0);">Immediate or Cancel</a>
+                                          </li>
+                                       </ul>
+                                    </div> -->
+                                 </div>
+                                 <!-- <div class="m-t-9">
+                                    <div class="input-group col-sm-12 m-b">
+                                       <span class="input-group-addon"><i class="fa fa-btc"></i></span>
+                                       <input type="text" placeholder="0.00000000" class="form-control text-right">
+                                    </div>
+                                 </div> -->
+                                 <div class="m-t-9">
+                                    <button type="button" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Buy</button>
+                                 </div>
+                              </div>
+                            </div>
+                           </div>
+                           </div>
+                           <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+                             <div class="">
+                              <div class="panel-heading">
+                              </div>
+                              <div class="panel-wrapper collapse in h-auto"><div class="pannel panel-body">
+                                 <div class="input-group col-sm-12 m-b">
+                                    <!-- <span class="input-group-addon btn-primary group-btn-hover darkformfield"><i class="fa fa-angle-double-up"></i> Max</span>
+                                    <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
+                                    <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-block">Transaction Type
+                                       <span class="caret"></span>
+                                       </button>
+                                       <ul role="menu" class="dropdown-menu">
+                                          <li><a href="javascript:void(0);">Stock</a>
+                                          </li>
+                                          <li><a href="javascript:void(0);">ETF</a>
+                                          </li>
+                                       </ul>
+                                 </div>
+                                 <div class="m-t-9">
+                                    <div class="input-group m-b">
+                                       <div class="input-group-btn">
+                                          <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle">Symbol
+                                          <!-- <span class="caret"></span> -->
+                                          </button>
+                                         
+                                       </div>
+                                       <input type="text" class="form-control text-right" placeholder="search">
+                                    </div>
+                                 </div>
+                                 <div class="m-t-9">
+                                    <div class="input-group m-b">
+                                       <div class="input-group-btn">
+                                          <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle">Quantity
+                                          <!-- <span class="caret"></span> -->
+                                          </button>
+                                         
+                                       </div>
+                                       <input type="text" class="form-control text-right" placeholder="">
+                                    </div>
+                                 </div>
+                                 <div class="m-t-9">
+                                    <div class="input-group m-b">
+                                       <div class="input-group-btn">
+                                          <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle">Price
+                                          <span class="caret"></span>
+                                          </button>
+                                          <!-- <ul class="dropdown-menu">
+                                             <li><a href="javascript:void(0);">Bid</a>
+                                             </li>
+                                             <li><a href="javascript:void(0);">Ask</a>
+                                             </li>
+                                          </ul> -->
+                                       </div>
+                                       <input type="text" class="form-control text-right" placeholder="0.00000000">
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <!-- <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
+                                       <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-block">Limit
+                                       <span class="caret"></span>
+                                       </button>
+                                       <ul role="menu" class="dropdown-menu">
+                                          <li><a href="javascript:void(0);">Limit</a>
+                                          </li>
+                                          <li><a href="javascript:void(0);">Conditional</a>
+                                          </li>
+                                       </ul>
+                                    </div> -->
+                                    <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
+                                       <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block">Order Type
+                                       <span class="caret"></span>
+                                       </button>
+                                       <ul role="menu" class="dropdown-menu">
+                                          <li><a href="javascript:void(0);">Market Order</a>
+                                          </li>
+                                          <li><a href="javascript:void(0);">Limit Order</a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                                
+                                 <div class="m-t-9">
+                                    <button type="button" class="btn btn-primary btn-block"><i class="fa fa-minus"></i> Sell</button>
+                                 </div>
+                              </div>
+                            </div>
+                           </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                  </div>
+                  </li>
+               </ul>
+            </nav>
+         </aside>
+         <section>
+            <section class="main-content">
+               <!-- <button type="button" class="btn btn-labeled btn-primary pull-right">
+               <span class="btn-label"><i class="fa fa-dollar"></i>
+               </span>Goto Wallet</button> -->
+               <!-- <h3>Dashboard
+               </h3> -->
+               <div class="row">
+                     <div class="col-md-12">
+                        <div class="panel panel-default">
+                           <div class="panel-heading">Dash board
+                              <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
+                              <em class="fa fa-minus"></em>
+                              </a>
+                           </div>
+                           <div class="table-responsive">
+                              <table class="table table-bordered table-hover">
+                                 <thead>
+                                    <tr>
+                                       <!-- <th><i class="fa fa-plus"></i></th> -->
+                                       <th>Symbol</th>
+                                       <th>Last Price</th>
+                                       <th>Todays Gain/Loss</th>
+                                       <th>Total Gain/Loss</th>
+                                       <th>Current Value</th>
+                                       <th>Quantity</th>
+                                     
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr>
+                                       <!-- <td><i class="fa fa-minus"></i></td> -->
+                                       <td>
+                                         
+                                       </td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td>
+                                         
+                                       </td>
+                                       
+                                    </tr>
+                                    <tr>
+                                       <!-- <td><i class="fa fa-minus"></i></td> -->
+                                       <td>
+                                         
+                                       </td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td>
+                                         
+                                       </td>
+                                       
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                           <div class="panel-footer">
+                              <div class="row">
+                                 <div class="col-lg-12">
+                                    <div class="float-right">
+                                       <ul class="pagination pagination-sm pagi-margin">
+                                          <li class="disabled"><a href="javascript:void(0);">First</a></li>
+                                       </ul>
+                                       <ul class="pagination pagination-sm pagi-margin">
+                                          <li class="disabled"><a href="javascript:void(0);">Prev</a></li>
+                                       </ul>
+                                       <ul class="pagination pagination-sm pagi-margin">
+                                          <li class="active"><a href="javascript:void(0);">1</a></li>
+                                          <li><a href="javascript:void(0);">2</a></li>
+                                          <li><a href="javascript:void(0);">3</a></li>
+                                          <li><a href="javascript:void(0);">4</a></li>
+                                          <li><a href="javascript:void(0);">5</a></li>
+                                       </ul>
+                                       <ul class="pagination pagination-sm pagi-margin">
+                                          <li><a href="javascript:void(0);">Next</a></li>
+                                       </ul>
+                                       <ul class="pagination pagination-sm pagi-margin">
+                                          <li><a href="javascript:void(0);">Last</a></li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+                     <!-- First Row Ends Here -->
+                     <!-- <div class="row">
+                        <div class="col-lg-12">
+                           <div class="panel panel-default">
+                              <div class="panel-heading">All Markets
+                                 <a href="javascript:void(0);" data-perform="panel-dismiss" data-toggle="tooltip" title="" class="pull-right" data-original-title="Close Panel">
+                                 <em class="fa fa-times"></em>
+                                 </a>
+                                 <a href="javascript:void(0);" data-perform="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
+                                 <em class="fa fa-plus"></em>
+                                 </a>
+                              </div>
+                              <div class="panel-wrapper collapse">
+                                 <div class="panel panel-default">
+                                    <div class="panel-heading">All Markets |
+                                       <small>All Availble Markets</small>
+                                    </div>
+                                    <div class="panel-body">
+                                                                           </div>
+                                 </div>
+                                 <div class="panel-footer">All Markets</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
+                     <!-- Chart Starts Here -->
+                     <div class="row">
+                        <div class="col-lg-9">
+                           <div class="panel panel-default">
+                              <div class="panel-collapse">
+                                 <div class="panel-body">
+                                    <h4>BTC-SC</h4>
+                                    <div id="candlestickChart" class="h-500">
+                                       
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                   
+                     <!-- Chart Ends Here -->
+           
+                  <!-- </div> -->
+                  <div class="col-md-3">
+                     
+                     <!-- Coin Status Ends Here -->
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                           <div class="pull-right"><i class="fa fa-bullhorn"></i></div>
+                           <div class="panel-title">Upcoming News</div>
+                        </div>
+                        <div class="list-group">
+                           <a href="#" class="list-group-item">
+                              <div class="media">
+                                 <div class="media-body">
+                                    <small class="pull-right">2h</small>
+                                    <strong class="media-heading text-primary">James</strong>
+                                    <p><small>Posted by James@example</small></p>
+                                    <p class="mb-sm">
+                                       <small>some news about the purchased stock</small>
+                                    </p>
+                                 </div>
+                              </div>
+                           </a>
+                           <a href="#" class="list-group-item">
+                              <div class="media">
+                                 <div class="media-body">
+                                    <small class="pull-right">2h</small>
+                                    <strong class="media-heading text-primary">Jimmy</strong>
+                                    <p><small>Posted by Jimmy@example</small></p>
+                                    <p class="mb-sm">
+                                       <small>some news about the purchased stock</small>
+                                    </p>
+                                 </div>
+                              </div>
+                           </a>
+                           <a href="#" class="list-group-item">
+                              <div class="media">
+                                 <div class="media-body">
+                                    <small class="pull-right">2h</small>
+                                    <strong class="media-heading text-primary">Franky</strong>
+                                    <p><small>Posted by Franky@example</small></p>
+                                    <p class="mb-sm">
+                                       <small>some news about the purchased stock</small>
+                                    </p>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                        <div class="panel-footer clearfix">
+                           <a href="#" class="pull-left">
+                           <small>Read All</small>
+                           </a>
+                           <a href="#" class="pull-right">
+                           <small>Dismiss All</small>
+                           </a>
+                        </div>
+                        <!-- <div class="panel-footer clearfix">
+                           <p>Upcoming News</p>
+                        </div> -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+               <!-- Orders Book -->
+               <!-- Open Orders -->
+               <div class="row">
+               <div class="col-md-12">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">Open Orders
+                        <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
+                        <em class="fa fa-minus"></em>
+                        </a>
+                     </div>
+                     <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                           <thead>
+                              <tr>
+                                 <th><i class="fa fa-plus"></i></th>
+                                 <th>Order Date</th>
+                                 <th>Type</th>
+                                 <th>Symbol</th>
+                                 <th>Price</th>
+                                 <th>Total Cost</th>
+                                 <th>Status</th>
+                               
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td><i class="fa fa-minus"></i></td>
+                                 <td>
+                                   
+                                 </td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td>
+                                   
+                                 </td>
+                                 
+                              </tr>
+                              <tr>
+                                 <td><i class="fa fa-minus"></i></td>
+                                 <td>
+                                   
+                                 </td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td>
+                                   
+                                 </td>
+                                 
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="panel-footer">
+                        <div class="row">
+                           <div class="col-lg-2">
+                              <div class="input-group">
+                                 <input type="text" placeholder="Search" class="input-sm form-control">
+                                 <span class="input-group-btn">
+                                 <button type="button" class="btn btn-sm btn-default">Search</button>
+                                 </span>
+                              </div>
+                           </div>
+                           <div class="col-lg-8"></div>
+                           <div class="col-lg-2">
+                              <div class="input-group pull-right">
+                                 <select class="input-sm form-control">
+                                    <option value="0">Bulk action</option>
+                                    <option value="1">Cancel All</option>
+                                 </select>
+                                 <span class="input-group-btn">
+                                 <button class="btn btn-sm btn-default">Apply</button>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+               <!-- My Order History -->
+               <div class="row">
+               <div class="col-md-12">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">My Order History
+                        <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
+                        <em class="fa fa-minus"></em>
+                        </a>
+                     </div>
+                     <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                           <thead>
+                              <tr>
+                                 <th><i class="fa fa-plus"></i></th>
+                                 <th>Order Date</th>
+                                 <th>Type</th>
+                                 <th>Symbol</th>
+                                 <th>Price</th>
+                                 <th>Total Cost</th>
+                                 <th>Status</th>
+                               
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td><i class="fa fa-minus"></i></td>
+                                 <td>
+                                   
+                                 </td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td>
+                                   
+                                 </td>
+                                 
+                              </tr>
+                              <tr>
+                                 <td><i class="fa fa-minus"></i></td>
+                                 <td>
+                                   
+                                 </td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td></td>
+                                 <td>
+                                   
+                                 </td>
+                                 
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="panel-footer">
+                        <div class="row">
+                           <div class="col-lg-12">
+                              <div class="float-right">
+                                 <ul class="pagination pagination-sm pagi-margin">
+                                    <li class="disabled"><a href="javascript:void(0);">First</a></li>
+                                 </ul>
+                                 <ul class="pagination pagination-sm pagi-margin">
+                                    <li class="disabled"><a href="javascript:void(0);">Prev</a></li>
+                                 </ul>
+                                 <ul class="pagination pagination-sm pagi-margin">
+                                    <li class="active"><a href="javascript:void(0);">1</a></li>
+                                    <li><a href="javascript:void(0);">2</a></li>
+                                    <li><a href="javascript:void(0);">3</a></li>
+                                    <li><a href="javascript:void(0);">4</a></li>
+                                    <li><a href="javascript:void(0);">5</a></li>
+                                 </ul>
+                                 <ul class="pagination pagination-sm pagi-margin">
+                                    <li><a href="javascript:void(0);">Next</a></li>
+                                 </ul>
+                                 <ul class="pagination pagination-sm pagi-margin">
+                                    <li><a href="javascript:void(0);">Last</a></li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+            </section>
+            <!-- FOOTER -->
+                 <footer class="footer bg-dark-2">
+                     <div class="container">
+                         <div class="row">
+
+                             <div class="col-md-4 col-sm-8">
+                                 <h4 class="logo"><i class="fa fa-doller-sign"></i> TRADE-FY</h4>
+                                 <p>Architecto beatae vitae dicta sunt explicabo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel sapien et lacus tempus varius. In finibus lorem vel.</p>
+
+                                 <ul class="list-inline social">
+                                     <li>
+                                         <a href="javascript:void(0);" class="bg-twitter"><i class="fa fa-twitter"></i></a>
+                                     </li>
+                                     <li>
+                                         <a href="javascript:void(0);" class="bg-dribbble"><i class="fa fa-dribbble"></i></a>
+                                     </li>
+                                     <li>
+                                         <a href="javascript:void(0);" class="bg-linkedin"><i class="fa fa-linkedin"></i></a>
+                                     </li>
+                                     <li>
+                                         <a href="javascript:void(0);" class="bg-googleplus"><i class="fa fa-google"></i></a>
+                                     </li>
+                                     <li>
+                                         <a href="javascript:void(0);" class="bg-facebook"><i class="fa fa-facebook"></i></a>
+                                     </li>
+                                 </ul>
+                             </div>
+
+                             <div class="col-md-3 col-sm-6">
+                                 <h5>Quick Links</h5>
+                                 <ul class="list-unstyled footer-list">
+                                     <li><a href="#">Fee Info</a></li>
+                                     <li><a href="#">Start Trading</a></li>
+                                     <li><a href="#">We are Hiring</a></li>
+                                     <li><a href="#">Blog Posts</a></li>
+                                     <li><a href="#">API Docs</a></li>
+                                 </ul>
+                             </div>
+
+                             <div class="col-md-3 col-sm-6">
+                                 <h5>Useful Links</h5>
+                                 <ul class="list-unstyled footer-list">
+                                     <li><a href="#">About Us</a></li>
+                                     <li><a href="#">Help &amp; Support</a></li>
+                                     <li><a href="#">Privacy Policy</a></li>
+                                     <li><a href="#">Terms &amp; Conditions</a></li>
+                                     <li><a href="#">FAQ</a></li>
+                                 </ul>
+                             </div>
+
+                         </div> <!-- end row -->
+
+                       
+                     </div> <!-- end container -->
+                 </footer> 
+                 <!-- end FOOTER -->
+         </section>
+      </section>
+      <script src="plugins/jquery/jquery.js"></script>
+      <script src="plugins/bootstrap/js/bootstrap.js"></script>
+      <script src="plugins/chosen/chosen.jquery.js"></script>
+      <script src="plugins/velocity/velocity.js"></script>
+      <script src="plugins/velocity/velocity.ui.js"></script>
+      <script src="plugins/slider/js/bootstrap-slider.js"></script>
+      <script src="plugins/filestyle/bootstrap-filestyle.js"></script>
+      <script src="plugins/animo/animo.js"></script>
+      <script src="plugins/sparklines/jquery.sparkline.js"></script>
+      <script src="plugins/slimscroll/jquery.slimscroll.js"></script>
+      <script src="plugins/datatable/media/js/jquery.dataTables.js"></script>
+      <script src="plugins/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrap.js"></script>
+      <script src="plugins/datatable/extensions/datatable-bootstrap/js/dataTables.bootstrapPagination.js"></script>
+      <script src="plugins/datatable/extensions/ColVis/js/dataTables.colVis.js"></script>
+      <script src="tradify/highcharts.js"></script>
+      <script src="tradify/exporting.js"></script>
+      <script src="plugins/datatable/extensions/ColVis/js/dataTables.colVis.js"></script>
+      <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
+      <script src="app/js/tradify.js"></script>
+      <script>
+         $(document).ready(function() {
+            // Candlestick
+            $.getJSON('tradify/data.json', function (data) {
+
+                // create the chart
+                Highcharts.stockChart('candlestickChart', {
+
+                  chart: {
+                },
+
+
+                    rangeSelector: {
+                        selected: 1
+                    },
+
+                    series: [{
+                        type: 'candlestick',
+                        name: 'SC-BTC',
+                        data: data,
+                        dataGrouping: {
+                            units: [
+                                [
+                                    'week', // unit name
+                                    [1] // allowed multiples
+                                ], [
+                                    'month',
+                                    [1, 2, 3, 4, 6]
+                                ]
+                            ]
+                        }
+                    }]
+                });
+            });
+            });
+      </script>
+   </body>
+
+
+</html>
