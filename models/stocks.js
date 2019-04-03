@@ -5,11 +5,11 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
         },
         quantity: {
-            type: DataTypes.INTIGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         price: {
-            type: DataTypes.INTIGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         }
     });
