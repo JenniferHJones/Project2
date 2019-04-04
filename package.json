@@ -1,5 +1,5 @@
 {
-  "name": "Project2",
+  "name": "project2",
   "version": "1.0.0",
   "description": "Project 2 Starter",
   "main": "server.js",
@@ -15,7 +15,11 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "mysql2": "^1.6.4",
-    "sequelize": "^4.41.2"
+    "passport": "^0.4.0",
+    "sequelize": "^4.41.2",
+    "bcrypt-nodejs": "0.0.3",
+    "express-session": "^1.14.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
