@@ -30,9 +30,8 @@ module.exports = function (sequelize, DataTypes) {
     },
   });
 
-  Customer.associate = function (models) {
-    Customer.hasMany(models.Transactions, {
-    });
+  Customer.associate = function(models) {
+    Customer.hasMany(models.Transaction);
   };
   return Customer;
 };
