@@ -1,18 +1,17 @@
 module.exports = function (sequelize, DataTypes) {
   var Customer = sequelize.define("Customer", {
-    firstName: {
+    
+    fullName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 20]
+        len: [1, 40]
       }
     },
-    lastName: {
+    tradeAcct: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1, 20]
-      }
+      allowNull: false
+      
     },
     email: {
       type: DataTypes.STRING,
@@ -28,6 +27,16 @@ module.exports = function (sequelize, DataTypes) {
         len: [4, 10]
       }
     },
+    // createdAt: {
+    //   type: DataTypes.DATE(3),
+    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3)'),
+    //   field: 'created_at',
+    // },
+    // updatedAt: {
+    //   type: DataTypes.DATE(3),
+    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'),
+    //   field: 'updated_at',
+    // },
   });
 
   Customer.associate = function(models) {

@@ -7,7 +7,7 @@ var passport = require("./config/passport");
 var db = require("./models");
 
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 54000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -24,7 +24,7 @@ app.use(passport.session());
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-var syncOptions = { force: false };
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
