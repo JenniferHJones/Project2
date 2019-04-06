@@ -5220,3 +5220,17 @@ select.input-sm {
 .m-t-20 {
     margin-top: 20px !important;
 }
+
+.modal-window1 {
+   background-color: #fff;
+}
+.modal-dialog{
+    width:360px;
+}
+.btn1{
+    /* background-color:white; */
+    color:black;
+}
+.display{
+display:none;
+}

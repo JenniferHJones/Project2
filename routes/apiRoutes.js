@@ -10,20 +10,64 @@ module.exports = function(app) {
   })
 
   //============== CODE PROVIDED FOR US BY PROJECT ===================
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  // Get bank account details
+  app.get("/api/bankaccount/:id", function(req, res) {
+   
+    db.CustomerBankAcct.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbCustomerBankAcct) {
+      res.json(dbCustomerBankAcct);
     });
+});
 
+// Get trading account details
+app.get("/api/tfyaccounts/:id", function(req, res) {
+   
+  db.Customer.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(dbCustomer) {
+    res.json(dbCustomer);
+  });
+});
+
+// save transfer amount in database
+app.get("/api/transfer", function(req, res) {
+  console.log(req.body, "req.body********");
+
+  db.Transfer.findAll({
+
+    attributes: ['creditAmount' , 'debitAmount'],
+    where: {
+      CustomerId: req.params.CustomerId
+    }
+  }).then(function(dbTransfer) {
+    res.json(dbTransfer);
   });
 
-  // Get all examples
-  // app.get("/api/examples", function(req, res) {
-  //   db.Example.findAll({}).then(function(dbExamples) {
-  //     res.json(dbExamples);
-  //   });
-  // });
+
+});
+
+// save transfer amount in database
+app.post("/api/transfer", function(req, res) {
+  console.log(req.body, "req.body********");
+  db.Transfer.create(req.body).then(function(dbTransfer) {
+    res.status(200).end();
+  });
+});
+
+
+// save transfer amount in database
+app.post("/api/setupacct", function(req, res) {
+  console.log(req.body, "req.body********");
+  db.CustomerBankAcct.create(req.body).then(function(dbCustomerBankAcct) {
+    res.status(200).end();
+  });
+});
+
 
   // Create a new example
   app.post("/api/examples", function(req, res) {
