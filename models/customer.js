@@ -12,9 +12,8 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     tradeAcct: {
-      type: DataTypes.INTEGER,
-      // allowNull: false
-      allowNull: true     
+      type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,

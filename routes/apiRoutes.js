@@ -2,64 +2,64 @@ var db = require("../models");
 var passport = require("../config/passport");
 var regAuth = require("../config/middleware/registerAuth");
 
-module.exports = function(app) {
+module.exports = function (app) {
 
   // Get bank account details
-  app.get("/api/bankaccount/:id", function(req, res) {
-   
+  app.get("/api/bankaccount/:id", function (req, res) {
+
     db.CustomerBankAcct.findOne({
       where: {
         id: req.params.id
       }
-    }).then(function(dbCustomerBankAcct) {
+    }).then(function (dbCustomerBankAcct) {
       res.json(dbCustomerBankAcct);
     });
-});
-
-// Get trading account details
-app.get("/api/tfyaccounts/:id", function(req, res) {
-   
-  db.Customer.findOne({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(dbCustomer) {
-    res.json(dbCustomer);
   });
-});
 
-// save transfer amount in database
-app.get("/api/transfer", function(req, res) {
-  console.log(req.body, "req.body********");
+  // Get trading account details
+  app.get("/api/tfyaccounts/:id", function (req, res) {
 
-  db.Transfer.findAll({
-
-    attributes: ['creditAmount' , 'debitAmount'],
-    where: {
-      CustomerId: req.params.CustomerId
-    }
-  }).then(function(dbTransfer) {
-    res.json(dbTransfer);
+    db.Customer.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dbCustomer) {
+      res.json(dbCustomer);
+    });
   });
-});
 
-// save transfer amount in database
-app.post("/api/transfer", function(req, res) {
-  console.log(req.body, "req.body********");
-  db.Transfer.create(req.body).then(function(dbTransfer) {
-    res.status(200).end();
+  // save transfer amount in database
+  app.get("/api/transfer", function (req, res) {
+    console.log(req.body, "req.body********");
+
+    db.Transfer.findAll({
+
+      attributes: ['creditAmount', 'debitAmount'],
+      where: {
+        CustomerId: req.params.CustomerId
+      }
+    }).then(function (dbTransfer) {
+      res.json(dbTransfer);
+    });
   });
-});
 
-// save transfer amount in database
-app.post("/api/setupacct", function(req, res) {
-  console.log(req.body, "req.body********");
-  db.CustomerBankAcct.create(req.body).then(function(dbCustomerBankAcct) {
-    res.status(200).end();
+  // save transfer amount in database
+  app.post("/api/transfer", function (req, res) {
+    console.log(req.body, "req.body********");
+    db.Transfer.create(req.body).then(function (dbTransfer) {
+      res.status(200).end();
+    });
   });
-});
 
-//======================= PASSPORT ==============================
+  // save transfer amount in database
+  app.post("/api/setupacct", function (req, res) {
+    console.log(req.body, "req.body********");
+    db.CustomerBankAcct.create(req.body).then(function (dbCustomerBankAcct) {
+      res.status(200).end();
+    });
+  });
+
+  //======================= PASSPORT ==============================
   // Using the passport.authenticate middleware with our local strategy. If customer has valid login
   // credentials, send them to the market page, otherwise the customer will be sent an error
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
@@ -74,19 +74,24 @@ app.post("/api/setupacct", function(req, res) {
   // how we configured the Sequelize Customer Model. If the customer is created successfully, proceed to log the customer in,
   // otherwise send back an error
   app.post("/api/register", regAuth, function (req, res) {
+    // Create random alphanumeric value with 8 characters
+    var tradeAcctVal = [...Array(8)].map(i => (~~(Math.random() * 36)).toString(36)).join('');
+    // Adds TFY prefix to value
+    var tradeAcct = "TFY" + tradeAcctVal;
+
     console.log("this is the request.body", req.body);
     db.Customer.create({
       fName: req.body.name,
+      tradeAcct: tradeAcct,
       email: req.body.email,
       password: req.body.password
     })
-    .then(function () {
-      res.send("Success");
-    })
+      .then(function () {
+        res.send("Success");
+      })
       .catch(function (err) {
         console.log(err);
         res.json(err);
-        // res.status(422).json(err.errors[0].message);
       });
   });
 
@@ -96,32 +101,33 @@ app.post("/api/setupacct", function(req, res) {
     res.redirect("/");
   });
 
-  // Route for getting some data about our customer to be used client side
+  // Route for getting some data about customer to be used client side
   app.get("/api/customer_data", function (req, res) {
     if (!req.customer) {
-      // If the customer is not logged in, send back an empty object
+      // If customer is not logged in, send back an empty object
       res.json({});
     } else {
-      // Otherwise send back the customer's name, email, and id
+      // Otherwise send back customer's name, email, and id
       res.json({
         name: req.customer.name,
+        tradeAcct: tradeAcct,
         email: req.customer.email,
         id: req.customer.id
       });
     }
   });
-  
+
   //============== CODE PROVIDED FOR US BY PROJECT ===================
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
+  app.post("/api/examples", function (req, res) {
+    db.Example.create(req.body).then(function (dbExample) {
       res.json(dbExample);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
+  app.delete("/api/examples/:id", function (req, res) {
+    db.Example.destroy({ where: { id: req.params.id } }).then(function (
       dbExample
     ) {
       res.json(dbExample);
