@@ -1,5 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
-    var Stocks = sequelize.define("Stock", {
+    var Stocks = sequelize.define
+    ("Stock", {
         symbol: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -8,27 +9,24 @@ module.exports = function (sequelize, DataTypes) {
         //     type: DataTypes.TIMEZONE,
         //     allowNull: false,
         // },
-        // timestamp: {
-        //     type: DataTypes.TIMESTAMP,
-        //     allowNull: false,
-        // },
-        openprice: {
+        //ID,"timestamp,"open","high","low","close","volume","Symbol"
+        timestamps: {
+             type: DataTypes.DATE(3),
+              allowNull: true,
+         },
+        open: {
             type: DataTypes.DECIMAL(10,2),
             allowNull: false,
         },
-        highprice: {
+        high: {
             type: DataTypes.DECIMAL(10,2),
             allowNull: false,
         },
-        lowprice: {
+        low: {
             type: DataTypes.DECIMAL(10,2),
             allowNull: false,
         },
-        highprice: {
-            type: DataTypes.DECIMAL(10,2),
-            allowNull: false,
-        },
-        closeprice: {
+        close: {
             type: DataTypes.DECIMAL(10,2),
             allowNull: false,
         },
@@ -36,7 +34,17 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-      
-    });
+       createdAt: {
+      type: DataTypes.DATE(3),
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3)'),
+      field: 'createdAt',
+    },
+    updatedAt: {
+      type: DataTypes.DATE(3),
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'),
+      field: 'updatedAt',
+    },
+    }
+    );
     return Stocks;
 };
