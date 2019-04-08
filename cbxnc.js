@@ -32,6 +32,7 @@ app.get("/api/stockDailyJSON/:symbol", function(req, res) {
   
     for(var i=0 ; i< dbStockDaily.length; i++)
     {
+     
        var subArr = {
      
         x :  Number(dbStockDaily[i].timestamps),
@@ -40,9 +41,11 @@ app.get("/api/stockDailyJSON/:symbol", function(req, res) {
              parseFloat(dbStockDaily[i].low),
              parseFloat(dbStockDaily[i].close)
         ] 
+
         }
     finalArr.push(subArr);
     }
+  
      res.send(finalArr);
   });
 });
@@ -74,6 +77,7 @@ app.get("/api/vw_CustomerBalance/:id", function(req, res) {
 });
 
 app.get("/api/seachBySymbol/:symbol", function(req, res) {
+   
   var stockTime ;
   db.Stock.max('timestamps', { where: { symbol: req.params.symbol } })  
   .then(function(dbStocktime) {
@@ -87,9 +91,7 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
       }
     }).then(function(dbStockPrice) {
       res.json(dbStockPrice);
-    });
-  });
-});
+
   // Get trading account details
   app.get("/api/tfyaccounts/:id", function (req, res) {
 
@@ -151,12 +153,7 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
     // Since we're doing a POST with javascript, we can't redirect that post into a GET request, so
     // send customer back the route to the sign in page because the redirect will happen on the front end.
     // They won't be able to access this page if they aren't authorized
- //get custoner id
-  
-   // res.json("/market");
-   console.log(res.id);
-   console.log(res.email);
-   res.send("res.id");
+    res.json("/market");
   });
 
   // Route for registering a customer. The customer's password is automatically hashed and stored securely thanks to
@@ -205,4 +202,3 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
       });
     }
   });
-}
