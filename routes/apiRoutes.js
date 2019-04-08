@@ -32,26 +32,17 @@ app.get("/api/stockDailyJSON/:symbol", function(req, res) {
   
     for(var i=0 ; i< dbStockDaily.length; i++)
     {
-      // var d = new Date(dbStockDaily[i].timestamps);
-      // var timedate = d.getFullYear()+("00"+d.getMonth()).slice(-2)+("00"+d.getDate()).slice(-2);
        var subArr = {
-        // x: new Date(
-				// 	parseInt(dbStockDaily[i].timestamps.split("-")[0]),
-				// 	parseInt(dbStockDaily[i].timestamps.split("-")[1]),
-				// 	parseInt(dbStockDaily[i].timestamps.split("-")[2])
-				// ),
-       
+     
         x :  Number(dbStockDaily[i].timestamps),
         y: [ parseFloat(dbStockDaily[i].open),
              parseFloat(dbStockDaily[i].high),
              parseFloat(dbStockDaily[i].low),
              parseFloat(dbStockDaily[i].close)
         ] 
-
         }
     finalArr.push(subArr);
     }
-    //  console.log(finalArr);
      res.send(finalArr);
   });
 });
@@ -80,12 +71,9 @@ app.get("/api/vw_CustomerBalance/:id", function(req, res) {
   .then(function(dbTransfer) {
     res.json(dbTransfer);   
   });
-
-
 });
 
 app.get("/api/seachBySymbol/:symbol", function(req, res) {
-   
   var stockTime ;
   db.Stock.max('timestamps', { where: { symbol: req.params.symbol } })  
   .then(function(dbStocktime) {
@@ -99,7 +87,9 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
       }
     }).then(function(dbStockPrice) {
       res.json(dbStockPrice);
-
+    });
+  });
+});
   // Get trading account details
   app.get("/api/tfyaccounts/:id", function (req, res) {
 
@@ -136,13 +126,8 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
     });
     // res.json(dbStocktime);   
   });
-  
-  
-});
 
-
-
-  // Create a new example
+  // Create a new order
   app.post("/api/order", function(req, res) {
     db.Transaction.create(req.body).then(function(dbTransction) {
       res.status(200).end();
@@ -166,7 +151,12 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
     // Since we're doing a POST with javascript, we can't redirect that post into a GET request, so
     // send customer back the route to the sign in page because the redirect will happen on the front end.
     // They won't be able to access this page if they aren't authorized
-    res.json("/market");
+ //get custoner id
+  
+   // res.json("/market");
+   console.log(res.id);
+   console.log(res.email);
+   res.send("res.id");
   });
 
   // Route for registering a customer. The customer's password is automatically hashed and stored securely thanks to
@@ -174,7 +164,7 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
   // otherwise send back an error
   app.post("/api/register", regAuth, function (req, res) {
     // Create random alphanumeric value with 8 characters
-    var tradeAcctVal = [...Array(8)].map(i => (~~(Math.random() * 36)).toString(36)).join('');
+    var tradeAcctVal = [Array(8)].map(i => (~~(Math.random() * 36)).toString(36)).join('');
     // Adds TFY prefix to value
     var tradeAcct = "TFY" + tradeAcctVal;
 
@@ -214,22 +204,5 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
         id: req.customer.id
       });
     }
-  });
-
-  //============== CODE PROVIDED FOR US BY PROJECT ===================
-  // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
-      res.json(dbExample);
-    });
-  });
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (
-      dbExample
-    ) {
-      res.json(dbExample);
-    });
   });
 }
