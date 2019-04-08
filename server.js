@@ -1,6 +1,8 @@
 require("dotenv").config();
 var express = require("express");
 var session = require("express-session");
+var path = require("path");
+
 // Requiring passport as we've configured it
 var passport = require("./config/passport");
 
@@ -12,7 +14,9 @@ var PORT = process.env.PORT || 54000;
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "/public")));
+
 // Use sessions to keep track of user's login status
 app.use(
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
