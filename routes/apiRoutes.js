@@ -15,7 +15,7 @@ module.exports = function(app) {
    
     db.CustomerBankAcct.findOne({
       where: {
-        id: req.params.id
+        CustomerId: req.params.id
       }
     }).then(function(dbCustomerBankAcct) {
       res.json(dbCustomerBankAcct);
@@ -34,47 +34,104 @@ app.get("/api/tfyaccounts/:id", function(req, res) {
   });
 });
 
-// save transfer amount in database
-app.get("/api/transfer", function(req, res) {
-  console.log(req.body, "req.body********");
 
-  db.Transfer.findAll({
-
-    attributes: ['creditAmount' , 'debitAmount'],
+// Get Stock price Daily details
+app.get("/api/stockDailyJSON/:symbol", function(req, res) {
+   
+  db.Stock.findAll({
     where: {
-      CustomerId: req.params.CustomerId
+      symbol: "MSFT"
     }
-  }).then(function(dbTransfer) {
-    res.json(dbTransfer);
+  }).then(function(dbStockDaily) {
+    // console.log(dbStockDaily.length);
+    var finalArr  =[];
+    // var jsonFormt = JSON.stringify(dbStockDaily);
+  
+    for(var i=0 ; i< dbStockDaily.length; i++)
+    {
+      // var d = new Date(dbStockDaily[i].timestamps);
+      // var timedate = d.getFullYear()+("00"+d.getMonth()).slice(-2)+("00"+d.getDate()).slice(-2);
+       var subArr = {
+        // x: new Date(
+				// 	parseInt(dbStockDaily[i].timestamps.split("-")[0]),
+				// 	parseInt(dbStockDaily[i].timestamps.split("-")[1]),
+				// 	parseInt(dbStockDaily[i].timestamps.split("-")[2])
+				// ),
+       
+        x :  Number(dbStockDaily[i].timestamps),
+        y: [ parseFloat(dbStockDaily[i].open),
+             parseFloat(dbStockDaily[i].high),
+             parseFloat(dbStockDaily[i].low),
+             parseFloat(dbStockDaily[i].close)
+        ] 
+
+        }
+    finalArr.push(subArr);
+    }
+    //  console.log(finalArr);
+     res.send(finalArr);
   });
-
-
 });
 
 // save transfer amount in database
 app.post("/api/transfer", function(req, res) {
-  console.log(req.body, "req.body********");
+  console.log(req.body, "req.body*****transfer***");
   db.Transfer.create(req.body).then(function(dbTransfer) {
     res.status(200).end();
   });
 });
 
 
-// save transfer amount in database
+// save customer bank acct in database
 app.post("/api/setupacct", function(req, res) {
-  console.log(req.body, "req.body********");
+  console.log(req.body, "req.body**setupacct******");
   db.CustomerBankAcct.create(req.body).then(function(dbCustomerBankAcct) {
     res.status(200).end();
   });
 });
 
+//available cash : acct balance
+app.get("/api/vw_CustomerBalance/:id", function(req, res) {
+  console.log(req.body, "req.body****vw_CustomerBalance****");
+  db.Transfer.sum('creditAmount', { where: { CustomerId: req.params.id } })  
+  .then(function(dbTransfer) {
+    res.json(dbTransfer);   
+  });
+
+
+});
+
+app.get("/api/seachBySymbol/:symbol", function(req, res) {
+   
+  var stockTime ;
+  db.Stock.max('timestamps', { where: { symbol: req.params.symbol } })  
+  .then(function(dbStocktime) {
+    stockTime = dbStocktime;
+   
+    console.log(stockTime);
+    db.Stock.findOne({
+      where: {
+        timestamps: dbStocktime,
+        symbol:req.params.symbol
+      }
+    }).then(function(dbStockPrice) {
+      res.json(dbStockPrice);
+    });
+    // res.json(dbStocktime);   
+  });
+  
+  
+});
+
+
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-    });
+  app.post("/api/order", function(req, res) {
+    db.Transaction.create(req.body).then(function(dbTransction) {
+      res.status(200).end();
+   
   });
+});
 
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {

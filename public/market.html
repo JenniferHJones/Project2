@@ -322,8 +322,8 @@
                            <div class="panel panel-default">
                               <div class="panel-collapse">
                                  <div class="panel-body">
-                                    <h4>BTC-SC</h4>
-                                    <div id="candlestickChart" class="h-500">
+                                    <h4>BTC-SC-Stock</h4>
+                                    <div id="chartContainer" class="h-500">
                                        
                                     </div>
                                  </div>
@@ -641,6 +641,8 @@
       <script src="tradify/exporting.js"></script>
       <script src="plugins/datatable/extensions/ColVis/js/dataTables.colVis.js"></script>
       <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
       <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
       <script src="app/js/tradify.js"></script>
       <script>
@@ -754,8 +756,8 @@
                                  <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="transactionType"> <span id="opt-trans">Options</span> <span class="caret"></span>
                                  </button>
                                    <ul class="dropdown-menu">
-                                     <li><a class="dropdown-item" id="3" href="#" >Market Order</a></li>
-                                     <li><a class="dropdown-item" id="4" href="#">Limit Order</a></li>
+                                     <li><a class="dropdown-item" id="3" href="#" >Stock/ETF</a></li>
+                                     <li><a class="dropdown-item" id="4" href="#">Mutual Fund</a></li>
                                      
                                    </ul>
                         </div>
@@ -766,9 +768,9 @@
                         <!-- <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control" id="symbol"> -->
                         <div class="input-group ">
                               
-                              <input type="text" class="form-control text-left" placeholder="search">
+                              <input type="text" class="form-control text-left" placeholder="search" id="symbol-text">
                               <div class="input-group-btn">
-                                    <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle" id="symbol">Symbol
+                                    <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle" id="seachSymbol">search
                                     <!-- <span class="caret"></span> -->
                                     </button>
                                  </div>
@@ -776,13 +778,10 @@
                      </div>
                      </div>
                      <div>
-                           <input type="text" class="form-control " placeholder="search" id="symbol-text" >
+                           <input type="text" class="form-control " placeholder="search" id="currentPrice" >
                      </div>
                      <div class="row form-group">
                            <div class="col-md-4">
-                           <!-- <label class="control-label">Action </label> -->
-                           <!-- <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control"> -->
-                           <!-- <div class="btn-group"> -->
                                  <label class="control-label">Action </label>
                                  <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">Options</span> <span class="caret"></span>
                                  </button>
@@ -791,24 +790,23 @@
                                      <li><a class="dropdown-item" id="2" href="#">Sell </a></li>
                                      
                                    </ul>
-                             <!-- </div> -->
-                             
-                            
-                        </div>
-                   
-                        <!-- <div class="form-group"> -->
-                              <div class="col-md-8">
-                              <label class="control-label">Quantity </label>
+                           </div>
+                           <div class="col-md-4">
+                              <label class="control-label">Order Type</label>
+                              <button class="btn btn1 btn-md p-5 btn-secondary dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" id="orderType"> <span id="opt2">Select</span> <span class="caret"></span>
+                              </button>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" id="5" href="#" >Market Order</a></li>
+                                  <li><a class="dropdown-item" id="6" href="#">Limit Order</a></li>
+                                </ul>
+                           </div>
+                           <div class="col-md-3">
+                              <label class="control-label">Quantity </label> 
                               <input type="text" id="quantity" name="quantity" required data-parsley-equalto="#id-amount" class="form-control">
                            
                            </div>
                      </div>
-                           <div class="form-group">
-                         
-                                 <label class="control-label">Order Type </label>
-                                 <input type="text" id="orderType" name="orderType" required data-parsley-equalto="#id-amount" class="form-control">
-                              
-                              </div>
+                           
                    </div>
                    <div class="modal-footer">
                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -820,19 +818,19 @@
          <!-- end buy modal -->
 
            <!-- start modal for setup-acct -->
-           <div class="modal fade" id="setupAcctModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered panel-default" role="document">
-              <div class="modal-content setupAcctModal">
-                <div class="modal-header bg-primary">
-                  <h5 class="modal-title" id="setupAcctModalTitle">Setup Account</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
+           <div class="modal fade" id="setupAcctModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
+                   </div>
                 <div class="modal-body">
                      <div class="form-group">
                            <label class="control-label">Bank Name</label>
-                           <input id="bank-name1" type="text" name="bankname" required class="form-control" >
+                           <input id="bank-name" type="text" name="bankname" required class="form-control" >
                         </div>
                      
                   <div class="form-group">
@@ -885,6 +883,18 @@
             });
             
             </script>
+             <script type="text/javascript">
+               $(function(){
+                 $("#5").click(function () {
+                 $("#opt2").text($(this).text());
+                 });
+                 $("#6").click(function () {
+                 $("#opt2").text($(this).text());
+                 });
+                
+               });
+               
+               </script>
          <!-- opt-trans -->
    </body>
 
