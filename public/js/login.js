@@ -32,10 +32,9 @@ $(document).ready(function() {
       email: email,
       password: password
     }).done(function(data) {
+      localStorage.setItem("currentUser", data.userID);
       console.log("received return", data);
-      // alert("you logged in correctly!")
-      window.location.replace(data);
-      // window.location.href = "/market";
+      window.location.replace(data.URL + "?currentUser=" + localStorage.getItem("currentUser"));
       // If there's an error, log the error
     }).fail(function(err) {
       $("#errorMessage").text("Bad email or password; please try again.")
@@ -43,4 +42,9 @@ $(document).ready(function() {
     });
   }
 
+  function logoutCustomer() {
+    console.log("Logged out!");
+    localStorage.setItem("currentUser", "");
+    window.location.replace("/");
+  }
 });
