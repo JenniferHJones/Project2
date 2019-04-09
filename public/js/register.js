@@ -35,7 +35,9 @@ $(document).ready(function () {
       email: email,
       password: password
     }).done(function (data) {
-      window.location.replace("/market");
+      $("#tab_default_1").removeClass("active");
+      $("#tab_default_2").addClass("active");
+      // window.location.replace("/market");
       // If there's an error, handle it by throwing up a bootstrap alert
     }).fail(function(err) {
       $("#regErrorMessage").text("This email already registered. Please sign in.")

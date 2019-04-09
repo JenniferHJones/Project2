@@ -18,7 +18,7 @@ passport.use(
           email: email
         }
       }).then(function (dbCustomer) {
-        console.log("*****Is this working for email?*****");
+        console.log("*****Is this working for email?*****", dbCustomer);
         // If there's no customer with the given email
         if (!dbCustomer) {
           console.log("*****Incorrect email!*****")

@@ -10,16 +10,12 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  app.get("/market", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/market.html"));
-  });
-
   //======================= PASSPORT ==============================
 
   // Here we add the isAuthenticated middleware to this route. If a customer who is not logged in
   // tries to access this route they will be redirected to the index page
   app.get("/market", isAuthenticated, function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.sendFile(path.join(__dirname, "../public/market.html"));
   });
 
   //============== CODE PROVIDED FOR US BY PROJECT ===================

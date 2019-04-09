@@ -160,13 +160,18 @@ db.Transaction.sum('quantity', { where: {
   // credentials, send them to the market page, otherwise the customer will be sent an error
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
     console.log("request body", req.body);
+    console.log("request user", req.user);
+
     // Since we're doing a POST with javascript, we can't redirect that post into a GET request, so
     // send customer back the route to the sign in page because the redirect will happen on the front end.
     // They won't be able to access this page if they aren't authorized
- //get custoner id
-  
-   res.json("/market");
-   
+
+    // res.json("/market");
+   res.json({
+     URL: "/market",
+     userID: req.user.id
+   });
+
   });
 
   // Route for registering a customer. The customer's password is automatically hashed and stored securely thanks to
@@ -174,7 +179,7 @@ db.Transaction.sum('quantity', { where: {
   // otherwise send back an error
   app.post("/api/register", regAuth, function (req, res) {
     // Create random alphanumeric value with 8 characters
-    var tradeAcctVal = [Array(8)].map(i => (~~(Math.random() * 36)).toString(36)).join('');
+    var tradeAcctVal = [...Array(8)].map(i => (~~(Math.random() * 36)).toString(36)).join('');
     // Adds TFY prefix to value
     var tradeAcct = "TFY" + tradeAcctVal;
 
