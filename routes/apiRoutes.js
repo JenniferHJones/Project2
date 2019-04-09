@@ -165,7 +165,7 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
   // otherwise send back an error
   app.post("/api/register", regAuth, function (req, res) {
     // Create random alphanumeric value with 8 characters
-    var tradeAcctVal = [Array(8)].map(i => (~~(Math.random() * 36)).toString(36)).join('');
+    var tradeAcctVal = [...Array(8)].map(i => (~~(Math.random() * 36)).toString(36)).join('');
     // Adds TFY prefix to value
     var tradeAcct = "TFY" + tradeAcctVal;
 
