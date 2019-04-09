@@ -16,7 +16,7 @@
       crossorigin="anonymous">
       <link rel="stylesheet" href="app/css/app.css">
       <script src="plugins/modernizr/modernizr.js"></script>
-      <script src="plugins/fastclick/fastclick.js"></script>
+    
    
    </head>
    <body>
@@ -133,7 +133,7 @@
                         <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
                               <ul id="myTabs" class="nav nav-tabs nav-tabs-noboder minus-margin-tab" role="tablist">
                                 <li role="presentation" class="active"><a href="#buyModal" class="tab-link-pad" id="trade-tab" role="tab" data-toggle="modal" aria-controls="home" aria-expanded="true"><i class="fa fa-gavel"></i> Trade</a></li>
-                                <li role="presentation" class=""><a href="#walletModal" class="tab-link-pad" role="tab" id="transfer-tab" data-toggle="modal" aria-controls="profile" aria-expanded="false"> Transfer</a></li>
+                                <li role="presentation" class=""><a href="" class="tab-link-pad" role="tab" id="transfer-tab" data-toggle="modal" aria-controls="profile" aria-expanded="false"> Transfer</a></li>
                               </ul>
                               <div id="myTabContent" class="tab-content tab-content-BuySell">
                                 <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
@@ -142,7 +142,7 @@
                                    </div>
                                    <div class="panel-wrapper collapse in h-auto"><div class="pannel panel-body">
                                       <div class="input-group col-sm-12 m-b">
-                                         <span class="input-group-addon btn-primary group-btn-hover darkformfield"><i class="fa fa-angle-double-up"></i> Max</span>
+                                         <span class="input-group-addon btn-primary group-btn-hover darkformfield"><i class="fa fa-angle-double-up"></i> Profile</span>
                                          <!-- <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
                                       </div>
                                       <div class="m-t-9">
@@ -156,7 +156,7 @@
                                       </div>
                                       <div class="row">
                                          <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
-                                            <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-block">xxx
+                                            <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-block">Manage Accounts
                                             <!-- <span class="caret"></span> -->
                                             </button>
                                             <!-- <ul role="menu" class="dropdown-menu">
@@ -167,7 +167,7 @@
                                             </ul> -->
                                          </div>
                                          <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
-                                             <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block">xxx
+                                             <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block">Live Pricing
                                                    <!-- <span class="caret"></span> -->
                                                    </button>
                                             <!-- <ul role="menu" class="dropdown-menu">
@@ -179,8 +179,8 @@
                                          </div>
                                       </div>
                                       <div class="m-t-9">
-                                         <div class="input-group col-sm-12 m-b">
-                                            <span class="input-group-addon"><i class="fa fa-btc"></i></span>
+                                         <div   class="input-group col-sm-12 m-b" id="sym">
+                                            <span class="input-group-addon"><i class="fa fa-btc">Symbol Search</i></span>
                                             <!-- <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
                                          </div>
                                       </div>
@@ -322,7 +322,18 @@
                            <div class="panel panel-default">
                               <div class="panel-collapse">
                                  <div class="panel-body">
-                                    <h4>BTC-SC-Stock</h4>
+                                    <div class="row">
+                                    <h4 class="col-md-3 offset-md-6 m-r-10">Stock Data </h4>
+                                    <div class="col-md-3 input-group">
+                                      
+                                       <input type="text" class="form-control text-left" placeholder="Symbol" id="text-chart">
+                                       <div class="input-group-btn">
+                                             <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle" id="chartSerach">search
+                                             <!-- <span class="caret"></span> -->
+                                             </button>
+                                          </div>
+                                    </div>
+                                 </div>
                                     <div id="chartContainer" class="h-500">
                                        
                                     </div>
@@ -641,46 +652,10 @@
       <script src="tradify/exporting.js"></script>
       <script src="plugins/datatable/extensions/ColVis/js/dataTables.colVis.js"></script>
       <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-      <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+      <!-- <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
       <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
       <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
-      <script src="app/js/tradify.js"></script>
-      <script>
-         $(document).ready(function() {
-            // Candlestick
-            $.getJSON('tradify/data.json', function (data) {
-
-                // create the chart
-                Highcharts.stockChart('candlestickChart', {
-
-                  chart: {
-                },
-
-
-                    rangeSelector: {
-                        selected: 1
-                    },
-
-                    series: [{
-                        type: 'candlestick',
-                        name: 'SC-BTC',
-                        data: data,
-                        dataGrouping: {
-                            units: [
-                                [
-                                    'week', // unit name
-                                    [1] // allowed multiples
-                                ], [
-                                    'month',
-                                    [1, 2, 3, 4, 6]
-                                ]
-                            ]
-                        }
-                    }]
-                });
-            });
-            });
-
+      <!-- <script src="app/js/tradify.js"></script> -->
       </script>
       <!-- start modal for wallet -->
             <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -695,7 +670,7 @@
                    <div class="modal-body">
                         <div class="form-group">
                               <label class="control-label">From Account</label>
-                              <input id="id-fromacct" type="text" name="fromacct" required class="form-control">
+                              <input id="id-fromacct" type="text" name="fromacct" required class="form-control" readonly="readonly">
                            </div>
                         
                      <div class="form-group">
@@ -737,12 +712,12 @@
                    <div class="modal-body">
                         <div class="form-group">
                               <label class="control-label">Account</label>
-                              <input id="id-acct" type="text" name="acct" required class="form-control">
+                              <input id="id-acct" type="text" name="acct" required class="form-control" readonly="readonly">
                            </div>
                         
                      <div class="form-group">
                         <label class="control-label">Available Cash</label>
-                        <input id="cash" type="text" name="cash" required class="form-control">
+                        <input id="cash" type="text" name="cash" required class="form-control" readonly="readonly">
                      </div>
                     
                      <div class="row form-group">
@@ -753,7 +728,7 @@
                         <div class="col-md-5">
                           
                                  <label class="control-label">Transaction Type</label>
-                                 <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="transactionType"> <span id="opt-trans">Options</span> <span class="caret"></span>
+                                 <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="transactionType"> <span id="opt-trans">Select</span> <span class="caret"></span>
                                  </button>
                                    <ul class="dropdown-menu">
                                      <li><a class="dropdown-item" id="3" href="#" >Stock/ETF</a></li>
@@ -778,12 +753,12 @@
                      </div>
                      </div>
                      <div>
-                           <input type="text" class="form-control " placeholder="search" id="currentPrice" >
+                           <input type="hidden" class="form-control " placeholder="search" id="currentPrice" >
                      </div>
                      <div class="row form-group">
-                           <div class="col-md-4">
+                           <div class="col-md-3">
                                  <label class="control-label">Action </label>
-                                 <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">Options</span> <span class="caret"></span>
+                                 <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">Select</span> <span class="caret"></span>
                                  </button>
                                    <ul class="dropdown-menu">
                                      <li><a class="dropdown-item" id="1" href="#" >Buy</a></li>
@@ -800,7 +775,7 @@
                                   <li><a class="dropdown-item" id="6" href="#">Limit Order</a></li>
                                 </ul>
                            </div>
-                           <div class="col-md-3">
+                           <div class="col-md-4">
                               <label class="control-label">Quantity </label> 
                               <input type="text" id="quantity" name="quantity" required data-parsley-equalto="#id-amount" class="form-control">
                            
@@ -896,6 +871,27 @@
                
                </script>
          <!-- opt-trans -->
+         <!-- Alert Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="modalInvalidNameImageURL"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <!-- <div class="modal-header">
+            <h2 class="modal-title" id="modalInvalidNameImageURL"></h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div> -->
+        <div class="modal-body">
+            <p class="lead"></p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+
    </body>
 
 

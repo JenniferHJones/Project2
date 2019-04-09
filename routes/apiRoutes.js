@@ -23,7 +23,7 @@ app.get("/api/stockDailyJSON/:symbol", function(req, res) {
    
   db.Stock.findAll({
     where: {
-      symbol: "MSFT"
+      symbol: req.params.symbol
     }
   }).then(function(dbStockDaily) {
     // console.log(dbStockDaily.length);
@@ -129,13 +129,25 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
 
   // Create a new order
   app.post("/api/order", function(req, res) {
-    db.Transaction.create(req.body).then(function(dbTransction) {
+    console.log(req.body, "req.body***Order*****");
+    db.Transaction.create(req.body).then(function(dbTransaction) {
       res.status(200).end();
    
   });
 });
 
-  // save transfer amount in database
+// Get stock quantity for customer and symbol
+app.get("/api/stockquantity/:CustomerId/:symbol", function (req, res) {
+//console.log(req);
+db.Transaction.sum('quantity', { where: {
+         CustomerId: req.params.CustomerId,
+          symbol:req.params.symbol } }
+          ).then(function (dbTransaction) {
+    res.json(dbTransaction);
+  });
+});
+
+// save transfer amount in database
   app.post("/api/setupacct", function (req, res) {
     console.log(req.body, "req.body********");
     db.CustomerBankAcct.create(req.body).then(function (dbCustomerBankAcct) {
@@ -153,11 +165,13 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
     // Since we're doing a POST with javascript, we can't redirect that post into a GET request, so
     // send customer back the route to the sign in page because the redirect will happen on the front end.
     // They won't be able to access this page if they aren't authorized
+
     // res.json("/market");
    res.json({
      URL: "/market",
      userID: req.user.id
    });
+
   });
 
   // Route for registering a customer. The customer's password is automatically hashed and stored securely thanks to
