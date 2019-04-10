@@ -4,13 +4,27 @@ var regAuth = require("../config/middleware/registerAuth");
 
 module.exports = function (app) {
 
-  // save customer bank acct in database
-app.post("/api/setupacct", function(req, res) {
-  console.log(req.body, "req.body**setupacct******");
-  db.CustomerBankAcct.create(req.body).then(function(dbCustomerBankAcct) {
-    res.status(200).end();
+  // Get order history
+  app.get("/api/transactions/", function (req, res) {
+    console.log("Current User ID:", req.query.currentUser);
+
+    db.Transaction.findAll({
+      where: {
+        CustomerID: req.query.currentUser
+      }
+    }).then(function (dbTransaction) {
+      console.log("received return", dbTransaction);
+      res.json(dbTransaction);
+    });
+  })
+
+  // Save customer bank acct in database
+  app.post("/api/setupacct", function (req, res) {
+    console.log(req.body, "req.body**setupacct******");
+    db.CustomerBankAcct.create(req.body).then(function (dbCustomerBankAcct) {
+      res.status(200).end();
+    });
   });
-});
 
   // Get bank account details
   app.get("/api/bankaccount/:CustomerId", function (req, res) {
@@ -24,85 +38,82 @@ app.post("/api/setupacct", function(req, res) {
     });
   });
 
-// Get trading account details
-app.get("/api/tfyaccounts/:CustomerId", function (req, res) {
+  // Get trading account details
+  app.get("/api/tfyaccounts/:CustomerId", function (req, res) {
 
-  db.Customer.findOne({
-    where: {
-      id: req.params.CustomerId
-    }
-  }).then(function (dbCustomer) {
-    res.json(dbCustomer);
-  });
-});
-
-//available cash : acct balance
-app.get("/api/vw_CustomerBalance/:CustomerId", function(req, res) {
-  console.log(req.body, "req.body****vw_CustomerBalance****");
-  db.Transfer.sum('creditAmount', { where: { CustomerId: req.params.CustomerId } })  
-  .then(function(dbTransfer) {
-    res.json(dbTransfer);   
-  });
-});
-// Get Stock price Daily details
-app.get("/api/stockDailyJSON/:symbol", function(req, res) {
-   
-  db.Stock.findAll({
-    where: {
-      symbol: req.params.symbol
-    }
-  }).then(function(dbStockDaily) {
-    // console.log(dbStockDaily.length);
-    var finalArr  =[];
-    // var jsonFormt = JSON.stringify(dbStockDaily);
-  
-    for(var i=0 ; i< dbStockDaily.length; i++)
-    {
-       var subArr = {
-     
-        x :  Number(dbStockDaily[i].timestamps),
-        y: [ parseFloat(dbStockDaily[i].open),
-             parseFloat(dbStockDaily[i].high),
-             parseFloat(dbStockDaily[i].low),
-             parseFloat(dbStockDaily[i].close)
-        ] 
-        }
-    finalArr.push(subArr);
-    }
-     res.send(finalArr);
-  });
-});
-
-// save transfer amount in database
-app.post("/api/transfer", function(req, res) {
-  console.log(req.body, "req.body*****transfer***");
-  db.Transfer.create(req.body).then(function(dbTransfer) {
-    res.status(200).end();
-  });
-});
-
-
-
-app.get("/api/seachBySymbol/:symbol", function(req, res) {
-  var stockTime ;
-  db.Stock.max('timestamps', { where: { symbol: req.params.symbol } })  
-  .then(function(dbStocktime) {
-    stockTime = dbStocktime;
-   
-    console.log(stockTime);
-    db.Stock.findOne({
+    db.Customer.findOne({
       where: {
-        timestamps: dbStocktime,
-        symbol:req.params.symbol
+        id: req.params.CustomerId
       }
-    }).then(function(dbStockPrice) {
-      res.json(dbStockPrice);
+    }).then(function (dbCustomer) {
+      res.json(dbCustomer);
     });
   });
-});
-  
 
-  // save transfer amount in database
+  // Available cash : acct balance
+  app.get("/api/vw_CustomerBalance/:CustomerId", function (req, res) {
+    console.log(req.body, "req.body****vw_CustomerBalance****");
+    db.Transfer.sum('creditAmount', { where: { CustomerId: req.params.CustomerId } })
+      .then(function (dbTransfer) {
+        res.json(dbTransfer);
+      });
+  });
+  
+  // Get Stock price Daily details
+  app.get("/api/stockDailyJSON/:symbol", function (req, res) {
+
+    db.Stock.findAll({
+      where: {
+        symbol: req.params.symbol
+      }
+    }).then(function (dbStockDaily) {
+      // console.log(dbStockDaily.length);
+      var finalArr = [];
+      // var jsonFormt = JSON.stringify(dbStockDaily);
+
+      for (var i = 0; i < dbStockDaily.length; i++) {
+        var subArr = {
+
+          x: Number(dbStockDaily[i].timestamps),
+          y: [parseFloat(dbStockDaily[i].open),
+          parseFloat(dbStockDaily[i].high),
+          parseFloat(dbStockDaily[i].low),
+          parseFloat(dbStockDaily[i].close)
+          ]
+        }
+        finalArr.push(subArr);
+      }
+      res.send(finalArr);
+    });
+  });
+
+  // Save transfer amount in database
+  app.post("/api/transfer", function (req, res) {
+    console.log(req.body, "req.body*****transfer***");
+    db.Transfer.create(req.body).then(function (dbTransfer) {
+      res.status(200).end();
+    });
+  });
+
+  app.get("/api/seachBySymbol/:symbol", function (req, res) {
+    var stockTime;
+    db.Stock.max('timestamps', { where: { symbol: req.params.symbol } })
+      .then(function (dbStocktime) {
+        stockTime = dbStocktime;
+
+        console.log(stockTime);
+        db.Stock.findOne({
+          where: {
+            timestamps: dbStocktime,
+            symbol: req.params.symbol
+          }
+        }).then(function (dbStockPrice) {
+          res.json(dbStockPrice);
+        });
+      });
+  });
+
+  // Save transfer amount in database
   app.get("/api/transfer", function (req, res) {
     console.log(req.body, "req.body********");
 
@@ -117,7 +128,7 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
     });
   });
 
-  // save transfer amount in database
+  // Save transfer amount in database
   app.post("/api/transfer", function (req, res) {
     console.log(req.body, "req.body********");
     db.Transfer.create(req.body).then(function (dbTransfer) {
@@ -128,26 +139,29 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
   });
 
   // Create a new order
-  app.post("/api/order", function(req, res) {
+  app.post("/api/order", function (req, res) {
     console.log(req.body, "req.body***Order*****");
-    db.Transaction.create(req.body).then(function(dbTransaction) {
+    db.Transaction.create(req.body).then(function (dbTransaction) {
       res.status(200).end();
-   
-  });
-});
 
-// Get stock quantity for customer and symbol
-app.get("/api/stockquantity/:CustomerId/:symbol", function (req, res) {
-//console.log(req);
-db.Transaction.sum('quantity', { where: {
-         CustomerId: req.params.CustomerId,
-          symbol:req.params.symbol } }
-          ).then(function (dbTransaction) {
-    res.json(dbTransaction);
+    });
   });
-});
 
-// save transfer amount in database
+  // Get stock quantity for customer and symbol
+  app.get("/api/stockquantity/:CustomerId/:symbol", function (req, res) {
+    //console.log(req);
+    db.Transaction.sum('quantity', {
+      where: {
+        CustomerId: req.params.CustomerId,
+        symbol: req.params.symbol
+      }
+    }
+    ).then(function (dbTransaction) {
+      res.json(dbTransaction);
+    });
+  });
+
+  // Save transfer amount in database
   app.post("/api/setupacct", function (req, res) {
     console.log(req.body, "req.body********");
     db.CustomerBankAcct.create(req.body).then(function (dbCustomerBankAcct) {
@@ -167,10 +181,10 @@ db.Transaction.sum('quantity', { where: {
     // They won't be able to access this page if they aren't authorized
 
     // res.json("/market");
-   res.json({
-     URL: "/market",
-     userID: req.user.id
-   });
+    res.json({
+      URL: "/market",
+      userID: req.user.id
+    });
 
   });
 
