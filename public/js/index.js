@@ -1,13 +1,54 @@
-$("#transfer-tab").on("click", function(event) {
-  // alert("in wallet");
-  var id = "1";
-  $.get("/api/bankaccount/" + id, function(data) {
+var CustomerId = localStorage.getItem("currentUser");
+$(".user-block-name").text(CustomerId);
+
+$.get("/api/tfyaccounts/" + CustomerId, function (data) {
+  console.log("acctno" + data.fName);
+  $(".user-block-name").text( data.fName);
+  console.log("i am here 2***");
+});
+
+//Set up account
+$("#setUpAcctBtn").on("click", function (event) {
+
+  var setUpAcct = {
+    bankName: $("#bank-name")
+      .val()
+      .trim(),
+    bankAcctNo: $("#bank-acctnum")
+      .val()
+      .trim(),
+    billingAddress: $("#billing-address")
+      .val()
+      .trim(),
+    zip: $("#zip")
+      .val()
+      .trim(),
+    CustomerId: CustomerId
+  };
+
+  $.post("/api/setupacct", setUpAcct)
+    // On success, run the following code
+    .then(function (data) {
+      console.log(data);
+      $(".lead").text("Your account set up successfully!");
+      $("#alertModal").modal("show");
+      $("#bank-name").val("");
+      $("#bank-acctnum").val("");
+      $("#billing-address").val("");
+      $("#zip").val();
+      $("#setupAcctModal").modal("hide");
+    });
+});
+
+$("#transfer-tab").on("click", function (event) {
+
+  $.get("/api/bankaccount/" + CustomerId, function (data) {
     console.log("acctno" + data.bankAcctNo);
     $("#id-fromacct").val(data.bankAcctNo);
     console.log("i am here 2***");
   });
 
-  $.get("/api/tfyaccounts/" + id, function(data) {
+  $.get("/api/tfyaccounts/" + CustomerId, function (data) {
     console.log("acctno" + data.tradeAcct);
     $("#id-toacct").val(data.tradeAcct);
     console.log("i am here 2***");
@@ -15,44 +56,22 @@ $("#transfer-tab").on("click", function(event) {
   $("#walletModal").modal("show");
 });
 
-//Display bank account and trading account in Transfer Money dialog.
-// $("#walletModal").on("show.bs.modal", function(event) {
-//   alert("in wallet");
-//   var modal = $(this);
-//   var id = "1";
-
-//   console.log("i am here 1***");
-//   $.get("/api/bankaccount/" + id, function(data) {
-//     console.log("acctno" + data.bankAcctNo);
-//     $("#id-fromacct").val(data.bankAcctNo);
-//     console.log("i am here 2***");
-//   });
-
-//   $.get("/api/tfyaccounts/" + id, function(data) {
-//     console.log("acctno" + data.tradeAcct);
-//     $("#id-toacct").val(data.tradeAcct);
-//     console.log("i am here 2***");
-//   });
-// });
-
 // buy modal
-$("#buyModal").on("show.bs.modal", function(event) {
+$("#buyModal").on("show.bs.modal", function (event) {
   var modal = $(this);
-  var id = "1";
-
-  $.get("/api/tfyaccounts/" + id, function(data) {
+  $.get("/api/tfyaccounts/" + CustomerId, function (data) {
     console.log("acctno" + data.tradeAcct);
     $("#id-acct").val(data.tradeAcct);
   });
 
-  $.get("/api/vw_CustomerBalance/" + id, function(data) {
+  $.get("/api/vw_CustomerBalance/" + CustomerId, function (data) {
     console.log("balance" + data);
     $("#cash").val(data);
   });
 });
 
 //transfer money
-$("#transferBtn").on("click", function(event) {
+$("#transferBtn").on("click", function (event) {
   event.preventDefault();
   var newTransfer = {
     creditAmount: $("#trans-amount")
@@ -62,17 +81,22 @@ $("#transferBtn").on("click", function(event) {
     transfer_date: $("#trans-date")
       .val()
       .trim(),
-    CustomerId: 1
+    CustomerId: CustomerId
   };
 
   $.post("/api/transfer", newTransfer)
     // On success, run the following code
-    .then(function(data) {
+    .then(function (data) {
       console.log(data);
+      $(".lead").text("Transfer successfull!");
+      $("#alertModal").modal("show");
+      $("#trans-date").val("");
+      $("#trans-amount").val("");
+      $("#setupAcctModal").modal("hide");
     });
 });
 //Seach Stock Symbol
-$("#seachSymbol").on("click", function(event) {
+$("#seachSymbol").on("click", function (event) {
   var marker = $("<span />").insertBefore("#currentPrice");
   $("#currentPrice")
     .detach()
@@ -82,7 +106,7 @@ $("#seachSymbol").on("click", function(event) {
   var symbol = $("#symbol-text")
     .val()
     .trim();
-  $.get("/api/seachBySymbol/" + symbol, function(data) {
+  $.get("/api/seachBySymbol/" + symbol, function (data) {
     var priceDelta = (Math.random() * parseFloat(data.close)) / 100;
     newClosePrice = (parseFloat(data.close) + parseFloat(priceDelta)).toFixed(
       2
@@ -101,70 +125,52 @@ $("#seachSymbol").on("click", function(event) {
   });
 });
 
-//Set up account
 
-$("#setUpAcctBtn").on("click", function(event) {
-  // var textFieldVal = $("#setupAcctModal #bank-acctnum").val().trim()
-  // console.log(bankName);
-  var setUpAcct = {
-    bankName: $("#bank-name")
-      .val()
-      .trim(),
-    bankAcctNo: $("#bank-acctnum")
-      .val()
-      .trim(),
-    billingAddress: $("#billing-address")
-      .val()
-      .trim(),
-    zip: $("#zip")
-      .val()
-      .trim(),
-    CustomerId: 1
-  };
-
-  $.post("/api/setupacct", setUpAcct)
-    // On success, run the following code
-    .then(function(data) {
-      console.log(data);
-      $(".lead").text("Your account set up successfully!");
-      $("#alertModal").modal("show");
-      $("#bank-name").val("");
-      $("#bank-acctnum").val("");
-      $("#billing-address").val("");
-      $("#zip").val();
-      $("#setupAcctModal").modal("hide");
-    });
-});
-
-$("#symbol").on("click", function(event) {
+$("#symbol").on("click", function (event) {
   //get request
 });
 
-$("#order").on("click", function(event) {
+$("#order").on("click", function (event) {
   // var orderDetails;
-  var CustomerId = 1;
-  var newTransferAmount = 0;
-  var transactionType = $("#opt-trans").text();
-  var symbol = $("#symbol-text")
-    .val()
-    .trim();
 
-  var action = $("#opt").text();
-  console.log(action);
-  var quantity = $("#quantity")
-    .val()
-    .trim();
-    
-   
-  var price = $("#currentPrice")
-    .val()
-    .trim();
-    
-    if (action === "Sell") {
-       quantity = -quantity;
+  var newTransferAmount = 0;
+  var orderDetails;
+  var transactionType = $("#opt-trans").text().trim();
+  var symbol = $("#symbol-text").val().trim();
+
+  var action = $("#opt").text().trim();
+  var quantity = $("#quantity").val().trim();
+  var price = $("#currentPrice").val().trim();
+
+ 
+  if (action === "Buy"){
+    placeOrderUpdateDb(transactionType,symbol,action,quantity, price);
+  }else if (action === "Sell") {
+    //Check customer input quantity is valid for sell
+    try {
+      $.get("/api/stockquantity/" + CustomerId + "/" + symbol, function (data) {
+        console.log("quantity from database**" + data);
+        if (quantity > data) {
+          $(".qnt-err-text").text("Available stock quantity for sell : " +  data);
+          throw "Please enter a valid quantity!";
+          // alert("Available stock quantity for sell" + data);
+        } else {
+          placeOrderUpdateDb(transactionType,symbol,action,quantity, price);
+        }
+
+      });
+    } catch (error) {
+      console.error(error);
+     
     }
-  // if (action === "Buy") {
-    var orderDetails = {
+  }
+ 
+});
+
+function  placeOrderUpdateDb(transactionType,symbol,action,quantity, price){
+
+  if (action === "Buy") {
+    orderDetails = {
       transactionType: transactionType,
       symbol: symbol,
       action: action,
@@ -173,73 +179,64 @@ $("#order").on("click", function(event) {
       // ordertype :"Market Order",
       CustomerId: CustomerId
     };
-  // } else if (action === "Sell") {
-    
-  //     orderDetails = {
-  //     transactionType: transactionType,
-  //     symbol: symbol,
-  //     action: action,
-  //     quantity: quantity,
-  //     price: price,
-  //     // ordertype :"Market Order",
-  //     CustomerId: 1
-  //   };
-  //}
- 
- 
-  //get available quantity from database
-  $.get("/api/stockquantity/" + CustomerId, +symbol, function(data) {
-    console.log(data);
-  });
-  // var newTransferAmount = -1 * parseFloat(price) * parseFloat(quantity);
-  
-  if(action==="Buy"){
-      newTransferAmount =  price * quantity;
-  }else if (action==="Sell")
-  {
-    newTransferAmount =  (-1)* price * quantity;
+    newTransferAmount = -1 * parseFloat(price) * parseFloat(quantity);;
+  } else if (action === "Sell") {
+    orderDetails = {
+      transactionType: transactionType,
+      symbol: symbol,
+      action: action,
+      quantity: -1 * quantity,
+      price: price,
+      // ordertype :"Market Order",
+      CustomerId: CustomerId
+    };
+    newTransferAmount = parseFloat(price) * parseFloat(quantity);
   }
-  
-  
-  console.log("transactionType" + transactionType);
-  console.log("action"+ action);
-  console.log( "quantity" + quantity);
-  console.log("price" +price);
-  console.log("newTransferAmount" +newTransferAmount);
-  
 
   var newTransferonOrder = {
     creditAmount: newTransferAmount,
     debitAmount: 0,
     transfer_date: new Date(),
-    CustomerId: 1
+    CustomerId: CustomerId
   };
 
   $.post("/api/order", orderDetails)
-    // On success, run the following code
-    .then(function(data) {
-      console.log(data);
-    });
+  // On success, run the following code
+  .then(function (data) {
+    console.log(data);
+    //once order process successfully then update the transfer table with the amount
+    $.post("/api/transfer", newTransferonOrder)
+      // On success, run the following code
+      .then(function (data) {
+        console.log(data);
+        $(".lead").text("Your order has been processed!");
+        $("#alertModal").modal("show");
+        $("#opt-trans").text("Select");
+        $("action").text("Select");
+        $("orderType").text("Select");
+        $("#symbol-text").val("");
+        $("#currentPrice").val("");
+        $("#quantity").val("");
+        $(".qnt-err-text").val("");
+        $("#buyModal").modal("hide");
+      });
+  });
+}
 
-  $.post("/api/transfer", newTransferonOrder)
-    // On success, run the following code
-    .then(function(data) {
-      console.log(data);
-    });
-});
 
-$("#options").on("click", function(event) {
+
+$("#options").on("click", function (event) {
   //post request :save data in database
 });
 
-$("#symbol").on("click", function(e) {
+$("#symbol").on("click", function (e) {
   $("#symbol-text").removeClass();
 });
 
-$("#chartSerach").on("click", function(event) {
-  
-  var symbol =$("#text-chart").val().trim();
-  
+$("#chartSerach").on("click", function (event) {
+
+  var symbol = $("#text-chart").val().trim();
+
   var dps = [];
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
@@ -256,25 +253,23 @@ $("#chartSerach").on("click", function(event) {
       includeZero: false,
       prefix: "$"
     },
-    data: [
-      {
-        type: "candlestick",
-        //type: "ohlc",
-        name: "Stock Price",
-        color: "#DD7E86",
-        showInLegend: true,
-        yValueFormatString: "$##0.00",
-        xValueType: "dateTime",
-        dataPoints: dps
-      }
-    ]
+    data: [{
+      type: "candlestick",
+      //type: "ohlc",
+      name: "Stock Price",
+      color: "#DD7E86",
+      showInLegend: true,
+      yValueFormatString: "$##0.00",
+      xValueType: "dateTime",
+      dataPoints: dps
+    }]
   });
-if(symbol != ""){
-  $.get("/api/stockDailyJSON/" + symbol, parseData);
-}
-else{
-  $.get("/api/stockDailyJSON/" + AMZN, parseData);
-}
+  if (symbol != "") {
+    $.get("/api/stockDailyJSON/" + symbol, parseData);
+  } else {
+    $.get("/api/stockDailyJSON/" + AMZN, parseData);
+  }
+
   function parseData(result) {
     for (var i = 0; i < 100; i++) {
       dps.push({

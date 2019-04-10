@@ -9,6 +9,9 @@ module.exports = function (sequelize, DataTypes) {
         bankAcctNo: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            validate: {
+                len: [10, 12]
+              }
 
         },
         billingAddress: {
@@ -19,6 +22,9 @@ module.exports = function (sequelize, DataTypes) {
         zip: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            validate: {
+                len: [5]
+              }
 
         },
         // createdAt: {

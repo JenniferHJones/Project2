@@ -33,7 +33,7 @@
                
                <ul class="nav navbar-nav navbar-right mt0">
                   <li class="dropdown dropdown-list">
-                     <a href="" data-toggle="modal" data-play="bounceIn" class="dropdown-toggle">
+                     <a href="" data-target="showCash" data-toggle="modal" data-play="bounceIn" class="dropdown-toggle">
                      <strong><i class="fa fa-btc"></i> Wallet</strong>
                      </a>
                      
@@ -99,7 +99,7 @@
                      <em class="fa fa-user"></em>
                      </a>
                      <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a>
+                        <li><a href="" data-target="#profileModal" data-toggle="modal">Profile</a>
                         </li>
                         <li><a href="#">Settings</a>
                         </li>
@@ -117,10 +117,10 @@
                   <li>
                      <div class="item user-block has-submenu">
                         <div class="user-block-picture">
-                           <img src="app/images/user/01.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle account-img-mb">
+                           <img src="app/images/user/3.png" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle account-img-mb">
                         </div>
                         <div class="user-block-info">
-                           <span class="user-block-name item-text">Mallika C</span>
+                           <span class="user-block-name item-text"></span>
                            <span class="user-block-role"><i class="fa fa-check text-green"></i> Verified</span>
                            <div class="label label-primary"><i class="fa fa-lock"></i> <a href="/logout">Logout</a></div>
                         </div>
@@ -142,7 +142,7 @@
                                    </div>
                                    <div class="panel-wrapper collapse in h-auto"><div class="pannel panel-body">
                                       <div class="input-group col-sm-12 m-b">
-                                         <span class="input-group-addon btn-primary group-btn-hover darkformfield"><i class="fa fa-angle-double-up"></i> Profile</span>
+                                         <span class="input-group-addon btn-primary group-btn-hover darkformfield" data-target="#profileModal" data-toggle="modal"></i> Manage Profile</span>
                                          <!-- <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
                                       </div>
                                       <div class="m-t-9">
@@ -156,7 +156,7 @@
                                       </div>
                                       <div class="row">
                                          <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
-                                            <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-block">Manage Accounts
+                                            <button type="button" data-target="#manageAccountModal" data-toggle="modal" class="btn btn-danger  btn-block">Manage Accounts
                                             <!-- <span class="caret"></span> -->
                                             </button>
                                             <!-- <ul role="menu" class="dropdown-menu">
@@ -167,20 +167,18 @@
                                             </ul> -->
                                          </div>
                                          <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
-                                             <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block">Live Pricing
-                                                   <!-- <span class="caret"></span> -->
+                                             <!-- <a href="/price"><button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block"></a>Live Pricing -->
+                                                <a class="btn btn-primary btn-block" href="/prices" role="button" target="_blank">Live Pricing</a>  
+                                                <!-- <span class="caret"></span> -->
                                                    </button>
-                                            <!-- <ul role="menu" class="dropdown-menu">
-                                               <li><a href="javascript:void(0);">Good 'Till Cancelled</a>
-                                               </li>
-                                               <li><a href="javascript:void(0);">Immediate or Cancel</a>
-                                               </li>
-                                            </ul> -->
+                                          
                                          </div>
                                       </div>
                                       <div class="m-t-9">
                                          <div   class="input-group col-sm-12 m-b" id="sym">
-                                            <span class="input-group-addon"><i class="fa fa-btc">Symbol Search</i></span>
+                                             <!-- <a class="btn btn-primary btn-block " href="/searchSymbol" role="button" target="_blank">Search Symbol</a>   -->
+                                             <span class="input-group-addon btn-primary group-btn-hover darkformfield" data-target="#profileModal" data-toggle="modal"></i>Find Symbol</span>
+                                            <!-- <span class="input-group-addon btn-block"><i class="fa fa-btc">Symbol Search</i></span> -->
                                             <!-- <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
                                          </div>
                                       </div>
@@ -655,7 +653,8 @@
       <!-- <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
       <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
       <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
-      <!-- <script src="app/js/tradify.js"></script> -->
+      <script src="plugins/fastclick/fastclick.js"></script>
+      <script src="app/js/tradify.js"></script>
       </script>
       <!-- start modal for wallet -->
             <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -705,6 +704,7 @@
                  <div class="modal-content">
                    <div class="modal-header">
                      <h5 class="modal-title" id="buyModal">Trade</h5>
+                     <p class="qnt-err-text text-c-red"></p>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                        <span aria-hidden="true">&times;</span>
                      </button>
@@ -791,13 +791,94 @@
                </div>
              </div>
          <!-- end buy modal -->
+   <!-- start modal for profile -->
+   <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="profileModalLabel">Manage Profile</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+          <div class="modal-body">
+               <div class="form-group">
+                     <label class="control-label">Full Name</label>
+                     <input id="bank-name" type="text" name="bankname" required class="form-control" >
+                  </div>
+               
+            <div class="form-group">
+               <label class="control-label">Email</label>
+               <input id="bank-acctnum" type="text" name="bankacct" required class="form-control">
+            </div>
 
+           <div>
+               <label class="control-label">Change Email </label>
+               <input type="text" id="billing-address" name="billaddress" required data-parsley-equalto="#bill-address" class="form-control">
+            
+            </div>
+            <div>
+               <label class="control-label">Change Password </label>
+               <input type="text" name="zip" required data-parsley-equalto="#id-zip" class="form-control" id="zip">
+            
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="setUpAcctBtn">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <!-- Manage Account Modal start here -->
+    <div class="modal fade" id="manageAccountModal" tabindex="-1" role="dialog" aria-labelledby="manageAccountModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="manageAccountModalLabel">Manage Profile</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+          <div class="modal-body">
+               <div class="form-group">
+                     <label class="control-label">Bank Name</label>
+                     <input id="bank-name" type="text" name="bankname" required class="form-control" >
+                  </div>
+               
+            <div class="form-group">
+               <label class="control-label">Account Number</label>
+               <input id="bank-acctnum" type="text" name="bankacct" required class="form-control">
+            </div>
+
+           <div>
+               <label class="control-label">Billing Address </label>
+               <input type="text" id="billing-address" name="billaddress" required data-parsley-equalto="#bill-address" class="form-control">
+            
+            </div>
+            <div>
+               <label class="control-label">Zip </label>
+               <input type="text" name="zip" required data-parsley-equalto="#id-zip" class="form-control" id="zip">
+            
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="setUpAcctBtn">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- manage account modal ends here -->
+
+      <!-- profile modal ends here -->
            <!-- start modal for setup-acct -->
            <div class="modal fade" id="setupAcctModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                <div class="modal-dialog" role="document">
                  <div class="modal-content">
                    <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                     <h5 class="modal-title" id="exampleModalLabel">Account Setup</h5>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                        <span aria-hidden="true">&times;</span>
                      </button>
