@@ -5224,9 +5224,10 @@ select.input-sm {
 .modal-window1 {
    background-color: #fff;
 }
-.modal-dialog{
+#buyModal #setupAcctModal #walletModal {
     width:360px;
 }
+
 .btn1{
     /* background-color:white; */
     color:black;

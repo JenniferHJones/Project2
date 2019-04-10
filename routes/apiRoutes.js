@@ -4,20 +4,46 @@ var regAuth = require("../config/middleware/registerAuth");
 
 module.exports = function (app) {
 
+  // save customer bank acct in database
+app.post("/api/setupacct", function(req, res) {
+  console.log(req.body, "req.body**setupacct******");
+  db.CustomerBankAcct.create(req.body).then(function(dbCustomerBankAcct) {
+    res.status(200).end();
+  });
+});
+
   // Get bank account details
-  app.get("/api/bankaccount/:id", function (req, res) {
+  app.get("/api/bankaccount/:CustomerId", function (req, res) {
 
     db.CustomerBankAcct.findOne({
       where: {
-        CustomerId: req.params.id
+        CustomerId: req.params.CustomerId
       }
     }).then(function (dbCustomerBankAcct) {
       res.json(dbCustomerBankAcct);
     });
   });
 
+// Get trading account details
+app.get("/api/tfyaccounts/:CustomerId", function (req, res) {
 
+  db.Customer.findOne({
+    where: {
+      id: req.params.CustomerId
+    }
+  }).then(function (dbCustomer) {
+    res.json(dbCustomer);
+  });
+});
 
+//available cash : acct balance
+app.get("/api/vw_CustomerBalance/:CustomerId", function(req, res) {
+  console.log(req.body, "req.body****vw_CustomerBalance****");
+  db.Transfer.sum('creditAmount', { where: { CustomerId: req.params.CustomerId } })  
+  .then(function(dbTransfer) {
+    res.json(dbTransfer);   
+  });
+});
 // Get Stock price Daily details
 app.get("/api/stockDailyJSON/:symbol", function(req, res) {
    
@@ -56,22 +82,6 @@ app.post("/api/transfer", function(req, res) {
 });
 
 
-// save customer bank acct in database
-app.post("/api/setupacct", function(req, res) {
-  console.log(req.body, "req.body**setupacct******");
-  db.CustomerBankAcct.create(req.body).then(function(dbCustomerBankAcct) {
-    res.status(200).end();
-  });
-});
-
-//available cash : acct balance
-app.get("/api/vw_CustomerBalance/:id", function(req, res) {
-  console.log(req.body, "req.body****vw_CustomerBalance****");
-  db.Transfer.sum('creditAmount', { where: { CustomerId: req.params.id } })  
-  .then(function(dbTransfer) {
-    res.json(dbTransfer);   
-  });
-});
 
 app.get("/api/seachBySymbol/:symbol", function(req, res) {
   var stockTime ;
@@ -90,17 +100,7 @@ app.get("/api/seachBySymbol/:symbol", function(req, res) {
     });
   });
 });
-  // Get trading account details
-  app.get("/api/tfyaccounts/:id", function (req, res) {
-
-    db.Customer.findOne({
-      where: {
-        id: req.params.id
-      }
-    }).then(function (dbCustomer) {
-      res.json(dbCustomer);
-    });
-  });
+  
 
   // save transfer amount in database
   app.get("/api/transfer", function (req, res) {
