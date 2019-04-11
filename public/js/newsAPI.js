@@ -18,13 +18,13 @@ function topHeadlines(){
         var searchLink1 = $(`<a href="${data.articles[0].url}" target="_blank">${data.articles[0].title}</a>`);
         var searchLink2 = $(`<a href="${data.articles[1].url}" target="_blank">${data.articles[1].title}</a>`);
         var searchLink3 = $(`<a href="${data.articles[2].url}" target="_blank">${data.articles[2].title}</a>`);
-        var searchLink4 = $(`<a href="${data.articles[3].url}" target="_blank">${data.articles[3].title}</a>`);
-        var searchLink5 = $(`<a href="${data.articles[4].url}" target="_blank">${data.articles[4].title}</a>`);
+        // var searchLink4 = $(`<a href="${data.articles[3].url}" target="_blank">${data.articles[3].title}</a>`);
+        // var searchLink5 = $(`<a href="${data.articles[4].url}" target="_blank">${data.articles[4].title}</a>`);
         $('#title_1').append(searchLink1); 
         $('#title_2').append(searchLink2); 
         $('#title_3').append(searchLink3); 
-        $('#title_4').append(searchLink4); 
-        $('#title_5').append(searchLink5); 
+        // $('#title_4').append(searchLink4); 
+        // $('#title_5').append(searchLink5); 
     }
     );}
 
@@ -45,18 +45,18 @@ function searchNewsApi(){
                 var searchLink1 = $(`<a href="${data.articles[0].url}" target="_blank">${data.articles[0].title}</a>`);
                 var searchLink2 = $(`<a href="${data.articles[1].url}" target="_blank">${data.articles[1].title}</a>`);
                 var searchLink3 = $(`<a href="${data.articles[2].url}" target="_blank">${data.articles[2].title}</a>`);
-                var searchLink4 = $(`<a href="${data.articles[3].url}" target="_blank">${data.articles[3].title}</a>`);
-                var searchLink5 = $(`<a href="${data.articles[4].url}" target="_blank">${data.articles[4].title}</a>`);
+                // var searchLink4 = $(`<a href="${data.articles[3].url}" target="_blank">${data.articles[3].title}</a>`);
+                // var searchLink5 = $(`<a href="${data.articles[4].url}" target="_blank">${data.articles[4].title}</a>`);
                 $('#title_1').empty();
                 $('#title_2').empty();
                 $('#title_3').empty();
-                $('#title_4').empty();
-                $('#title_5').empty();
+                // $('#title_4').empty();
+                // $('#title_5').empty();
                 $('#title_1').append(searchLink1); 
                 $('#title_2').append(searchLink2); 
                 $('#title_3').append(searchLink3); 
-                $('#title_4').append(searchLink4); 
-                $('#title_5').append(searchLink5); 
+                // $('#title_4').append(searchLink4); 
+                // $('#title_5').append(searchLink5); 
             }
         });
     });
