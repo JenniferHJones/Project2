@@ -39,7 +39,7 @@ $(document).ready(function () {
     // Function to construct HTML
     function createNewRow(transactions) {
         var formattedDate = new Date(transactions.createdAt);
-        formattedDate = moment(formattedDate).format("MMMM Do, YYYY");
+        formattedDate = moment(formattedDate).format("DD/MM/YYYY");
 
         var totalCost = transactions.price * transactions.quantity;
         var formattedTotalCost = totalCost.toLocaleString(undefined, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -48,7 +48,7 @@ $(document).ready(function () {
         newOrderHistoryRow.append($("<td>" + formattedDate + "</td>"));
         newOrderHistoryRow.append($("<td>" + transactions.action + "</td>"));
         newOrderHistoryRow.append($("<td>" + transactions.symbol + "</td>"));
-        newOrderHistoryRow.append($("<td>" + transactions.price + "</td>"));
+        newOrderHistoryRow.append($("<td>" + "$" + transactions.price + "</td>"));
         newOrderHistoryRow.append($("<td>" + transactions.quantity + "</td>"));
         newOrderHistoryRow.append($("<td>" + formattedTotalCost + "</td>"));
         // newOrderHistoryRow.append($("<td>" + "" + "</td>"));
@@ -69,10 +69,10 @@ $(document).ready(function () {
     // Function to construct HTML
     function createNewRowShort(transactions) {
         var formattedDate = new Date(transactions.createdAt);
-        formattedDate = moment(formattedDate).format("MMMM Do, YYYY");
+        formattedDate = moment(formattedDate).format("DD/MM/YYYY");
 
         var newShortOrderHistoryRow = $("<tr>");
-        newShortOrderHistoryRow.append($("<td>" + transactions.action + "</td>"));
+        newShortOrderHistoryRow.append($("<td>" + transactions.action + " " + transactions.symbol + "</td>"));
         newShortOrderHistoryRow.append($("<td>" + formattedDate + "</td>"));
         newShortOrderHistoryRow.append($("<td>" + "Complete" + "</td>"));
 
