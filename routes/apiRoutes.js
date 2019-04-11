@@ -4,6 +4,17 @@ var regAuth = require("../config/middleware/registerAuth");
 
 module.exports = function (app) {
 
+  app.get("/api/market/:id", function (req, res) {
+    db.Transaction.findAll({
+      where: {
+        customerId: req.params.id
+      },
+    }).then(function (dbTransData) {
+
+      res.json(dbTransData);
+    });
+  });
+
   // API routes - Requires the newsapi package and News API Key.
   // This file uses the Node.js server side NewAPI. 
   // The file has two routes that the data sent to server and data is return to the client.
