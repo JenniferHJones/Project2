@@ -4,9 +4,40 @@ var regAuth = require("../config/middleware/registerAuth");
 
 module.exports = function (app) {
 
+  // API routes - Requires the newsapi package and News API Key.
+  // This file uses the Node.js server side NewAPI. 
+  // The file has two routes that the data sent to server and data is return to the client.
+
+  const NewsAPI = require('newsapi');
+  const newsapi = new NewsAPI('414c176d6a044edb8222137ce0a3513f');
+
+  // This get returns the top business headlines 
+  app.get("/api/newsData", function (req, res) {
+    newsapi.v2.topHeadlines({
+      category: 'business',
+      language: 'en',
+      country: 'us'
+    }).then(response => {
+      // console.log(response);
+      res.json(response);
+    });
+  });
+  // This post sends inputSearchValue to the newsapi and returns data on search value.
+  app.post("/api/newsData", function (req, res) {
+    console.log("Sohail's Body", req.body);
+    newsapi.v2.everything({
+      q: req.body.stockName,
+      sortBy: 'relevancy',
+      page: 2
+    }).then(response => {
+      console.log("This is Sohail's", response);
+      res.json(response);
+    });
+  });
+
   // Get order history
   app.get("/api/transactions/", function (req, res) {
-    console.log("Current User ID:", req.query.currentUser);
+    // console.log("Current User ID:", req.query.currentUser);
 
     db.Transaction.findAll({
       where: {
@@ -58,7 +89,7 @@ module.exports = function (app) {
         res.json(dbTransfer);
       });
   });
-  
+
   // Get Stock price Daily details
   app.get("/api/stockDailyJSON/:symbol", function (req, res) {
 
