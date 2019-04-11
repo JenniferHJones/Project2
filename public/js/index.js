@@ -111,7 +111,7 @@ $("#transferBtn").on("click", function (event) {
         $("#alertModal").modal("show");
         $("#trans-date").val("");
         $("#trans-amount").val("");
-        $("#setupAcctModal").modal("hide");
+        $("#walletModal").modal("hide");
       });
   }
 });
@@ -316,7 +316,7 @@ $("#mc-update").on("click", function (e) {
 });
 
 
-$("#chartSerach").on("click", function (event) {
+$("#chartSearch").on("click", function (event) {
 
   var symbol = $("#text-chart").val().trim();
 
