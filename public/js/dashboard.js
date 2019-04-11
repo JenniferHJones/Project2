@@ -4,17 +4,35 @@ $(document).ready(function () {
         // script to append data to dashboard 
         var createRow = function (data) {
 
-            // var gainT = "some math";
-            // var totalGain = "some math";
+
 
             for (var i = 0; i < data.length; i++) {
+                // calculate gains
+                var dailyGain = Number(data[i].price - data[i].symbol.close);
+                var totalGain = dailyGain.toFixed(2);
+
                 var tableRow = $("<tr>");
-                tableRow.append($("<td>" + data[i].symbol + "</td>"));
+                tableRow.append($("<td>" + data[i].symbol.symbol + "</td>"));
                 tableRow.append($("<td>" + "$" + data[i].price + "</td>"));
-                tableRow.append($("<td>" + "something" + "</td>"));
-                tableRow.append($("<td>" + "something" + "</td>"));
+                tableRow.append($("<td class='todayGain'>" + "$" + totalGain + "</td>"));
+                tableRow.append($("<td class='totalGain'>" + "$" + totalGain + "</td>"));
                 tableRow.append($("<td>" + "$" + data[i].symbol.close + "</td>"));
                 tableRow.append($("<td>" + data[i].quantity + "</td>"));
+
+                // change color of gain if - or +
+                if (dailyGain >= 0) {
+                    $(".todayGain").addClass("green");
+                } else if (dailyGain < 0) {
+                    $(".todayGain").addClass("red");
+
+                }
+
+                if (dailyGain >= 0) {
+                    $(".totalGain").addClass("green");
+                } else if (dailyGain < 0) {
+                    $(".totalGain").addClass("red");
+
+                }
 
                 $("#dashboard-body").append(tableRow);
             }
