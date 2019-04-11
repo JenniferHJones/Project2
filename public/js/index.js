@@ -2,9 +2,9 @@ var CustomerId = localStorage.getItem("currentUser");
 $(".user-block-name").text(CustomerId);
 
 $.get("/api/tfyaccounts/" + CustomerId, function (data) {
-  console.log("acctno" + data.fName);
+  if(data !== null){
   $(".user-block-name").text(data.fName);
-  console.log("i am here 2***");
+  }
 });
 
 //Set up account
@@ -35,7 +35,6 @@ $("#setUpAcctBtn").on("click", function (event) {
     $.post("/api/setupacct", setUpAcct)
       // On success, run the following code
       .then(function (data) {
-        console.log(data);
         $(".lead").text("Your account set up successfully!");
         $("#alertModal").modal("show");
         $("#bank-name").val("");
@@ -55,11 +54,8 @@ $("#transfer-tab").on("click", function (event) {
     if (data !== null) {
 
       $("#id-fromacct").val(data.bankAcctNo);
-
       $.get("/api/tfyaccounts/" + CustomerId, function (data) {
-        console.log("acctno" + data.tradeAcct);
         $("#id-toacct").val(data.tradeAcct);
-        console.log("i am here 2***");
       });
     }
   });
@@ -68,14 +64,17 @@ $("#transfer-tab").on("click", function (event) {
 
 // buy modal
 $("#buyModal").on("show.bs.modal", function (event) {
-  var modal = $(this);
+ 
   $.get("/api/tfyaccounts/" + CustomerId, function (data) {
-    if (data.tradeAcct != "" || data.tradeAcct !== null) {
-      console.log("acctno" + data.tradeAcct);
+    if (data != "") {
+    
       $("#id-acct").val(data.tradeAcct);
       $.get("/api/vw_CustomerBalance/" + CustomerId, function (data) {
-        console.log("balance" + data);
-        $("#cash").val(data);
+      if(data === null)
+      {
+        data = 0;
+      }
+          $("#cash").val(data);
       });
 
     }
@@ -107,7 +106,7 @@ $("#transferBtn").on("click", function (event) {
     $.post("/api/transfer", newTransfer)
       // On success, run the following code
       .then(function (data) {
-        console.log(data);
+       
         $(".lead").text("Transfer successfull!");
         $("#alertModal").modal("show");
         $("#trans-date").val("");
@@ -129,21 +128,17 @@ $("#searchSymbol").on("click", function (event) {
     .val()
     .trim();
   $.get("/api/seachBySymbol/" + symbol, function (data) {
+    if(data !==null){
     var priceDelta = (Math.random() * parseFloat(data.close)) / 100;
-    newClosePrice = (parseFloat(data.close) + parseFloat(priceDelta)).toFixed(
-      2
-    );
+    newClosePrice = (parseFloat(data.close) + parseFloat(priceDelta)).toFixed(2);
     var priceSpread = (
       (parseFloat(newClosePrice) * Math.random()) /
       500
     ).toFixed(2);
-
-    // console.log("Close: " + data.close);
-    // console.log("PriceDelta: " + priceDelta);
-    // console.log("NewClosePrice: " + newClosePrice);
+    
     $("#currentPrice").val(newClosePrice); //Current Price
+    }
 
-    // console.log("Spread" + priceSpread);
   });
 });
 
@@ -271,6 +266,10 @@ $("#show-wallet").on("click", function (event) {
   //post request :save data in database
   $.get("/api/vw_CustomerBalance/" + CustomerId, function (data) {
     console.log("balance" + data);
+    if(data === null)
+    {
+      data =0;
+    }
     $("#wallet-amount").text("$" + data)
   });
 });
@@ -278,26 +277,25 @@ $("#show-wallet").on("click", function (event) {
 
 // buy modal
 $("#profileModal").on("show.bs.modal", function (event) {
-  var modal = $(this);
+  
   $.get("/api/tfyaccounts/" + CustomerId, function (data) {
-    console.log(data.fName);
-    console.log(data.email);
+    if(data!== null){
     $("#mp-name").val(data.fName);
     $("#mp-email").val(data.email);
+    }
   });
-
 
 });
 
 $("#manageAccountModal").on("show.bs.modal", function (event) {
 
   $.get("/api/bankaccount/" + CustomerId, function (data) {
-
+  if(data!== null){
     $("#mc-bank-name").text("Bank Name : " + data.bankName);
     $("#mc-bank-acctnum").text("Bank Account : " + data.bankAcctNo);
     $("#mc-bank-address").text("Bank Address : " + data.billingAddress);
     $("#mc-bank-zip").text("Zip : " + data.zip);
-
+  }   
   });
 });
 

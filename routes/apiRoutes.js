@@ -102,6 +102,10 @@ module.exports = function (app) {
       }
     }).then(function (dbCustomer) {
       res.json(dbCustomer);
+    })
+    .catch(function (err) {
+      console.log(err);
+      res.json(err);
     });
   });
 
