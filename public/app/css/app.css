@@ -4106,7 +4106,7 @@ div.dropdown-menu a{
     background-repeat: repeat;
 }
 .navbar-inverse {
-    background-color: #fff; !important;
+    background-color: #fff !important;
     border: none !important;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
@@ -5200,7 +5200,7 @@ select.input-sm {
 .fc-button {
     padding: 10px;
 }
-}
+
 /*Chart*/
 .highcharts-background {
   cursor:crosshair !important;
@@ -5242,6 +5242,12 @@ display:none;
     z-index: 2000; 
 }
 
-#buyModal{
-    z-index: 1900; 
+.red {
+    font-weight: bold;
+    color: red;
+}
+
+.green {
+    font-weight: bold;
+    color: rgb(3, 168, 3);
 }
