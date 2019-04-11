@@ -3,7 +3,7 @@ $(".user-block-name").text(CustomerId);
 
 $.get("/api/tfyaccounts/" + CustomerId, function (data) {
   console.log("acctno" + data.fName);
-  $(".user-block-name").text( data.fName);
+  $(".user-block-name").text(data.fName);
   console.log("i am here 2***");
 });
 
@@ -26,32 +26,34 @@ $("#setUpAcctBtn").on("click", function (event) {
     CustomerId: CustomerId
   };
 
-    if(setUpAcct.bankName==="" ||setUpAcct.bankAcctNo==="" || setUpAcct.billingAddress==="" || setUpAcct.zip===""){
+  if (setUpAcct.bankName === "" || setUpAcct.bankAcctNo === "" || setUpAcct.billingAddress === "" || setUpAcct.zip === "") {
 
-      $(".lead").text("Please provide the account details.");
-      $("#alertModal").modal("show");
-    }
+    $(".lead").text("Please provide the account details.");
+    $("#alertModal").modal("show");
+  } else {
 
-  $.post("/api/setupacct", setUpAcct)
-    // On success, run the following code
-    .then(function (data) {
-      console.log(data);
-      $(".lead").text("Your account set up successfully!");
-      $("#alertModal").modal("show");
-      $("#bank-name").val("");
-      $("#bank-acctnum").val("");
-      $("#billing-address").val("");
-      $("#zip").val();
-      $("#setupAcctModal").modal("hide");
-    });
+    $.post("/api/setupacct", setUpAcct)
+      // On success, run the following code
+      .then(function (data) {
+        console.log(data);
+        $(".lead").text("Your account set up successfully!");
+        $("#alertModal").modal("show");
+        $("#bank-name").val("");
+        $("#bank-acctnum").val("");
+        $("#billing-address").val("");
+        $("#zip").val();
+        $("#setupAcctModal").modal("hide");
+      });
+  }
 });
+
 
 $("#transfer-tab").on("click", function (event) {
 
 
   $.get("/api/bankaccount/" + CustomerId, function (data) {
-    if(data !== null){
-      
+    if (data !== null) {
+
       $("#id-fromacct").val(data.bankAcctNo);
 
       $.get("/api/tfyaccounts/" + CustomerId, function (data) {
@@ -61,9 +63,6 @@ $("#transfer-tab").on("click", function (event) {
       });
     }
   });
-
-  
- 
   $("#walletModal").modal("show");
 });
 
@@ -71,14 +70,18 @@ $("#transfer-tab").on("click", function (event) {
 $("#buyModal").on("show.bs.modal", function (event) {
   var modal = $(this);
   $.get("/api/tfyaccounts/" + CustomerId, function (data) {
-    console.log("acctno" + data.tradeAcct);
-    $("#id-acct").val(data.tradeAcct);
+    if (data.tradeAcct != "" || data.tradeAcct !== null) {
+      console.log("acctno" + data.tradeAcct);
+      $("#id-acct").val(data.tradeAcct);
+      $.get("/api/vw_CustomerBalance/" + CustomerId, function (data) {
+        console.log("balance" + data);
+        $("#cash").val(data);
+      });
+
+    }
   });
 
-  $.get("/api/vw_CustomerBalance/" + CustomerId, function (data) {
-    console.log("balance" + data);
-    $("#cash").val(data);
-  });
+
 });
 
 //transfer money
@@ -95,26 +98,27 @@ $("#transferBtn").on("click", function (event) {
       .trim(),
     CustomerId: CustomerId
   };
-  if( fromAcct === "" || newTransfer.creditAmount==="" || newTransfer.transfer_date===""){
+
+  if (fromAcct === "" || newTransfer.creditAmount === "" || newTransfer.transfer_date === "") {
 
     $(".lead").text("Please provide the date and amount");
     $("#alertModal").modal("show");
+  } else {
+    $.post("/api/transfer", newTransfer)
+      // On success, run the following code
+      .then(function (data) {
+        console.log(data);
+        $(".lead").text("Transfer successfull!");
+        $("#alertModal").modal("show");
+        $("#trans-date").val("");
+        $("#trans-amount").val("");
+        $("#setupAcctModal").modal("hide");
+      });
   }
-
-
-  $.post("/api/transfer", newTransfer)
-    // On success, run the following code
-    .then(function (data) {
-      console.log(data);
-      $(".lead").text("Transfer successfull!");
-      $("#alertModal").modal("show");
-      $("#trans-date").val("");
-      $("#trans-amount").val("");
-      $("#setupAcctModal").modal("hide");
-    });
 });
+
 //Seach Stock Symbol
-$("#seachSymbol").on("click", function (event) {
+$("#searchSymbol").on("click", function (event) {
   var marker = $("<span />").insertBefore("#currentPrice");
   $("#currentPrice")
     .detach()
@@ -153,7 +157,7 @@ $("#order").on("click", function (event) {
 
   var newTransferAmount = 0;
   var orderDetails;
- 
+
   var account = $("#id-acct").val().trim();
   var availableCash = $("#cash").val().trim();
   var transactionType = $("#opt-trans").text().trim();
@@ -163,40 +167,40 @@ $("#order").on("click", function (event) {
   var quantity = $("#quantity").val().trim();
   var price = $("#currentPrice").val().trim();
 
-  if(account ==="" || transactionType==="" ||symbol==="" || action==="" || quantity==="" || price===""|| availableCash==="" ){
+  if (account === "" || transactionType === "" || symbol === "" || action === "" || quantity === "" || price === "" || availableCash === "") {
 
     $(".lead").text("Please provide all the details");
     $("#alertModal").modal("show");
   }
- 
-  if (action === "Buy"){
-    placeOrderUpdateDb(transactionType,symbol,action,quantity, price);
-  }else if (action === "Sell") {
+
+  if (action === "Buy") {
+    placeOrderUpdateDb(transactionType, symbol, action, quantity, price);
+  } else if (action === "Sell") {
     //Check customer input quantity is valid for sell
     try {
       $.get("/api/stockquantity/" + CustomerId + "/" + symbol, function (data) {
         console.log("quantity from database**" + data);
         if (quantity > data) {
-          if(data=== null || data==="")
-          {
-            data=0;
+          if (data === null || data === "") {
+            data = 0;
           }
-          $(".qnt-err-text").text("Available stock quantity for sell : " +  data);
+          $(".qnt-err-text").text("Available stock quantity for sell : " + data);
           throw "Please enter a valid quantity!";
           // alert("Available stock quantity for sell" + data);
         } else {
-          placeOrderUpdateDb(transactionType,symbol,action,quantity, price);
+          placeOrderUpdateDb(transactionType, symbol, action, quantity, price);
         }
 
       });
     } catch (error) {
       console.error(error);
-     
+
     }
   }
- 
+
 });
-function  placeOrderUpdateDb(transactionType,symbol,action,quantity, price){
+
+function placeOrderUpdateDb(transactionType, symbol, action, quantity, price) {
 
   if (action === "Buy") {
     orderDetails = {
@@ -230,26 +234,26 @@ function  placeOrderUpdateDb(transactionType,symbol,action,quantity, price){
   };
 
   $.post("/api/order", orderDetails)
-  // On success, run the following code
-  .then(function (data) {
-    console.log(data);
-    //once order process successfully then update the transfer table with the amount
-    $.post("/api/transfer", newTransferonOrder)
-      // On success, run the following code
-      .then(function (data) {
-        console.log(data);
-        $(".lead").text("Your order has been processed!");
-        $("#alertModal").modal("show");
-        $("#opt-trans").text("Select");
-        $("action").text("Select");
-        $("orderType").text("Select");
-        $("#symbol-text").val("");
-        $("#currentPrice").val("");
-        $("#quantity").val("");
-        $(".qnt-err-text").val("");
-        $("#buyModal").modal("hide");
-      });
-  });
+    // On success, run the following code
+    .then(function (data) {
+      console.log(data);
+      //once order process successfully then update the transfer table with the amount
+      $.post("/api/transfer", newTransferonOrder)
+        // On success, run the following code
+        .then(function (data) {
+          console.log(data);
+          $(".lead").text("Your order has been processed!");
+          $("#alertModal").modal("show");
+          $("#opt-trans").text("Select");
+          $("action").text("Select");
+          $("orderType").text("Select");
+          $("#symbol-text").val("");
+          $("#currentPrice").val("");
+          $("#quantity").val("");
+          $(".qnt-err-text").val("");
+          $("#buyModal").modal("hide");
+        });
+    });
 }
 
 
@@ -282,34 +286,34 @@ $("#profileModal").on("show.bs.modal", function (event) {
     $("#mp-email").val(data.email);
   });
 
-  
+
 });
 
 $("#manageAccountModal").on("show.bs.modal", function (event) {
 
   $.get("/api/bankaccount/" + CustomerId, function (data) {
-   
+
     $("#mc-bank-name").text("Bank Name : " + data.bankName);
-    $("#mc-bank-acctnum").text("Bank Account : " +data.bankAcctNo);
-    $("#mc-bank-address").text("Bank Address : " +data.billingAddress);
+    $("#mc-bank-acctnum").text("Bank Account : " + data.bankAcctNo);
+    $("#mc-bank-address").text("Bank Address : " + data.billingAddress);
     $("#mc-bank-zip").text("Zip : " + data.zip);
-   
+
   });
 });
 
 
 $("#mc-delete").on("click", function (e) {
   $("#mc-bank-name").text("");
-    $("#mc-bank-acctnum").text("");
-    $("#mc-bank-address").text("");
-    $("#mc-bank-zip").text("");
+  $("#mc-bank-acctnum").text("");
+  $("#mc-bank-address").text("");
+  $("#mc-bank-zip").text("");
 
 });
 
 $("#mc-update").on("click", function (e) {
   $("#manageAccountModal").modal("hide");
   $("#setupAcctModal").modal("show");
- 
+
 
 });
 
