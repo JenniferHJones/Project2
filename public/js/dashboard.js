@@ -8,28 +8,28 @@ $(document).ready(function () {
 
         for (var i = 0; i < data.length; i++) {
             var tableRow = $("<tr>");
-            tableRow.append($("<td>" + data.symbol + "</td>"));
+            tableRow.append($("<td>" + data[i].symbol + "</td>"));
+            tableRow.append($("<td>" + "$" + data[i].price + "</td>"));
+            tableRow.append($("<td>" + "something" + "</td>"));
+            tableRow.append($("<td>" + "something" + "</td>"));
+            tableRow.append($("<td>" + "$" + data[i].symbol.close + "</td>"));
+            tableRow.append($("<td>" + data[i].quantity + "</td>"));
 
-            // var symbol = $("<td>").text(data.symbol);
-            // var price = $("<td>").text(data.price);
-            // var gainToday = $("<td>").text(gainT);
-            // var gainTotal = $("<td>").text(totalGain);
-            // var current = $("<td>").text(data.price);
-            // var quantity = $("<td>").text(data.quantity);
-
-            // tableRow.append(symbol, price, current, quantity);
             $("#dashboard-body").append(tableRow);
-            return tableRow;
         }
     };
 
-    console.log("Is this being called?");
-    // somehow 
     var customerID = localStorage.getItem("currentUser");
     $.ajax({
-        url: "/api/market/"+ customerID,
+        url: "/api/market/" + customerID,
         method: "GET"
     }).then(function (response) {
         createRow(response);
+
+        // make another ajax request get with symbol
+
+        // update the existing table
     });
+
+
 });
