@@ -233,6 +233,58 @@ $("#symbol").on("click", function (e) {
   $("#symbol-text").removeClass();
 });
 
+
+$("#show-wallet").on("click", function (event) {
+  //post request :save data in database
+  $.get("/api/vw_CustomerBalance/" + CustomerId, function (data) {
+    console.log("balance" + data);
+    $("#wallet-amount").text("$" + data)
+  });
+});
+
+
+// buy modal
+$("#profileModal").on("show.bs.modal", function (event) {
+  var modal = $(this);
+  $.get("/api/tfyaccounts/" + CustomerId, function (data) {
+    console.log(data.fName);
+    console.log(data.email);
+    $("#mp-name").val(data.fName);
+    $("#mp-email").val(data.email);
+  });
+
+  
+});
+
+$("#manageAccountModal").on("show.bs.modal", function (event) {
+
+  $.get("/api/bankaccount/" + CustomerId, function (data) {
+   
+    $("#mc-bank-name").text("Bank Name : " + data.bankName);
+    $("#mc-bank-acctnum").text("Bank Account : " +data.bankAcctNo);
+    $("#mc-bank-address").text("Bank Address : " +data.billingAddress);
+    $("#mc-bank-zip").text("Zip : " + data.zip);
+   
+  });
+});
+
+
+$("#mc-delete").on("click", function (e) {
+  $("#mc-bank-name").text("");
+    $("#mc-bank-acctnum").text("");
+    $("#mc-bank-address").text("");
+    $("#mc-bank-zip").text("");
+
+});
+
+$("#mc-update").on("click", function (e) {
+  $("#manageAccountModal").modal("hide");
+  $("#setupAcctModal").modal("show");
+ 
+
+});
+
+
 $("#chartSerach").on("click", function (event) {
 
   var symbol = $("#text-chart").val().trim();

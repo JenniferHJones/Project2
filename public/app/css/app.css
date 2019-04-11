@@ -5227,6 +5227,9 @@ select.input-sm {
 #buyModal #setupAcctModal #walletModal {
     width:360px;
 }
+.custom-modal {
+    width:360px;
+}
 
 .btn1{
     /* background-color:white; */
