@@ -5238,6 +5238,10 @@ select.input-sm {
 .display{
 display:none;
 }
-/* #currentPrice {
-    border: 0;
-} */
+#alertModal{
+    z-index: 2000; 
+}
+
+#buyModal{
+    z-index: 1900; 
+}
