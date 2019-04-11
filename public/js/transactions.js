@@ -7,75 +7,99 @@ $(document).ready(function () {
     // Variable to hold transactions
     var transactions;
 
-    // Determines ID of logged in customer
-    var url = window.location.search;
-    var customerID;
-    if (url.indexOf("?currentUser=") !== -1) {
-        customerID = url.split("=")[1];
-        getTransactions(customerID);
-    };
+    $("#notification-click").on("click", function (event) {
 
-    // Function to grab transactions from database to display on page
-    function getTransactions(customer) {
-        customerID = "?currentUser=" + customerID;
+        // Determines ID of logged in customer
+        var url = window.location.search;
+        var customerID;
+        if (url.indexOf("?currentUser=") !== -1) {
+            customerID = url.split("=")[1];
+            getTransactions(customerID);
+        };
 
-        $.get("/api/transactions" + customerID, function (data) {
-            transactions = data;
-            initializeRows();
-            initializeRowsShort();
-        });
-    };
+        // Function to grab transactions from database to display on page
+        function getTransactions(customer) {
+            customerID = "?currentUser=" + customerID;
 
-    // Function to append constructed HTML to orderHistory on Market page
-    function initializeRows() {
-        orderHistory.empty();
-        var transactionsToAdd = [];
-        for (var i = 0; i < transactions.length; i++) {
-            transactionsToAdd.push(createNewRow(transactions[i]));
-        }
-        orderHistory.append(transactionsToAdd);
-    };
+            $.get("/api/transactions" + customerID, function (data) {
+                transactions = data;
+                initializeRowsShort();
+            });
+        };
 
-    // Function to construct HTML
-    function createNewRow(transactions) {
-        var formattedDate = new Date(transactions.createdAt);
-        formattedDate = moment(formattedDate).format("DD/MM/YYYY");
+        // Function to append constructed HTML to notification header on Market page
+        function initializeRowsShort() {
+            // shortOrderHistory.empty();
+            var transactionsToAddShort = [];
+            for (var i = 0; i < transactions.length; i++) {
+                transactionsToAddShort.push(createNewRowShort(transactions[i]));
+            }
+            shortOrderHistory.append(transactionsToAddShort);
+        };
 
-        var totalCost = transactions.price * transactions.quantity;
-        var formattedTotalCost = totalCost.toLocaleString(undefined, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        // Function to construct HTML
+        function createNewRowShort(transactions) {
+            var formattedDate = new Date(transactions.createdAt);
+            formattedDate = moment(formattedDate).format("DD/MM/YYYY");
 
-        var newOrderHistoryRow = $("<tr>");
-        newOrderHistoryRow.append($("<td>" + formattedDate + "</td>"));
-        newOrderHistoryRow.append($("<td>" + transactions.action + "</td>"));
-        newOrderHistoryRow.append($("<td>" + transactions.symbol + "</td>"));
-        newOrderHistoryRow.append($("<td>" + "$" + transactions.price + "</td>"));
-        newOrderHistoryRow.append($("<td>" + transactions.quantity + "</td>"));
-        newOrderHistoryRow.append($("<td>" + formattedTotalCost + "</td>"));
-        // newOrderHistoryRow.append($("<td>" + "" + "</td>"));
+            var newShortOrderHistoryRow = $("<tr>");
+            newShortOrderHistoryRow.append($("<td>" + transactions.action + " " + transactions.symbol + "</td>"));
+            newShortOrderHistoryRow.append($("<td>" + formattedDate + "</td>"));
+            newShortOrderHistoryRow.append($("<td>" + "Complete" + "</td>"));
 
-        return newOrderHistoryRow;
-    };
+            return newShortOrderHistoryRow;
+        };
+    });
 
-    // Function to append constructed HTML to notification header on Market page
-    function initializeRowsShort() {
-        // shortOrderHistory.empty();
-        var transactionsToAddShort = [];
-        for (var i = 0; i < transactions.length; i++) {
-            transactionsToAddShort.push(createNewRowShort(transactions[i]));
-        }
-        shortOrderHistory.append(transactionsToAddShort);
-    };
+    $("#orderHistory-click").on("click", function (event) {
 
-    // Function to construct HTML
-    function createNewRowShort(transactions) {
-        var formattedDate = new Date(transactions.createdAt);
-        formattedDate = moment(formattedDate).format("DD/MM/YYYY");
+        // Determines ID of logged in customer
+        var url = window.location.search;
+        var customerID;
+        if (url.indexOf("?currentUser=") !== -1) {
+            customerID = url.split("=")[1];
+            getTransactions(customerID);
+        };
 
-        var newShortOrderHistoryRow = $("<tr>");
-        newShortOrderHistoryRow.append($("<td>" + transactions.action + " " + transactions.symbol + "</td>"));
-        newShortOrderHistoryRow.append($("<td>" + formattedDate + "</td>"));
-        newShortOrderHistoryRow.append($("<td>" + "Complete" + "</td>"));
+        // Function to grab transactions from database to display on page
+        function getTransactions(customer) {
+            customerID = "?currentUser=" + customerID;
 
-        return newShortOrderHistoryRow;
-    };
+            $.get("/api/transactions" + customerID, function (data) {
+                transactions = data;
+                initializeRows();
+            });
+        };
+
+        // Function to append constructed HTML to orderHistory on Market page
+        function initializeRows() {
+            orderHistory.empty();
+            var transactionsToAdd = [];
+            for (var i = 0; i < transactions.length; i++) {
+                transactionsToAdd.push(createNewRow(transactions[i]));
+            }
+            orderHistory.append(transactionsToAdd);
+        };
+
+        // Function to construct HTML
+        function createNewRow(transactions) {
+            var formattedDate = new Date(transactions.createdAt);
+            formattedDate = moment(formattedDate).format("DD/MM/YYYY");
+
+            var totalCost = transactions.price * transactions.quantity;
+            var formattedTotalCost = totalCost.toLocaleString(undefined, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            var newOrderHistoryRow = $("<tr>");
+            newOrderHistoryRow.append($("<td>" + formattedDate + "</td>"));
+            newOrderHistoryRow.append($("<td>" + transactions.action + "</td>"));
+            newOrderHistoryRow.append($("<td>" + transactions.symbol + "</td>"));
+            newOrderHistoryRow.append($("<td>" + "$" + transactions.price + "</td>"));
+            newOrderHistoryRow.append($("<td>" + transactions.quantity + "</td>"));
+            newOrderHistoryRow.append($("<td>" + formattedTotalCost + "</td>"));
+            // newOrderHistoryRow.append($("<td>" + "" + "</td>"));
+
+            return newOrderHistoryRow;
+        };
+    });
+
 })

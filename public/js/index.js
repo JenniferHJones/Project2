@@ -347,7 +347,7 @@ $("#chartSearch").on("click", function (event) {
       dataPoints: dps
     }]
   });
-  if (symbol != "") {
+  if (symbol !=="" || symbol !==null) {
     $.get("/api/stockDailyJSON/" + symbol, parseData);
   } else {
     $.get("/api/stockDailyJSON/" + AMZN, parseData);

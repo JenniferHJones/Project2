@@ -1,35 +1,36 @@
 $(document).ready(function () {
 
-    // script to append data to dashboard 
-    var createRow = function (data) {
+    $(".dashboard-click").on("click", function (event) {
+        // script to append data to dashboard 
+        var createRow = function (data) {
 
-        // var gainT = "some math";
-        // var totalGain = "some math";
+            // var gainT = "some math";
+            // var totalGain = "some math";
 
-        for (var i = 0; i < data.length; i++) {
-            var tableRow = $("<tr>");
-            tableRow.append($("<td>" + data[i].symbol + "</td>"));
-            tableRow.append($("<td>" + "$" + data[i].price + "</td>"));
-            tableRow.append($("<td>" + "something" + "</td>"));
-            tableRow.append($("<td>" + "something" + "</td>"));
-            tableRow.append($("<td>" + "$" + data[i].symbol.close + "</td>"));
-            tableRow.append($("<td>" + data[i].quantity + "</td>"));
+            for (var i = 0; i < data.length; i++) {
+                var tableRow = $("<tr>");
+                tableRow.append($("<td>" + data[i].symbol + "</td>"));
+                tableRow.append($("<td>" + "$" + data[i].price + "</td>"));
+                tableRow.append($("<td>" + "something" + "</td>"));
+                tableRow.append($("<td>" + "something" + "</td>"));
+                tableRow.append($("<td>" + "$" + data[i].symbol.close + "</td>"));
+                tableRow.append($("<td>" + data[i].quantity + "</td>"));
 
-            $("#dashboard-body").append(tableRow);
-        }
-    };
+                $("#dashboard-body").append(tableRow);
+            }
+        };
 
-    var customerID = localStorage.getItem("currentUser");
-    $.ajax({
-        url: "/api/market/" + customerID,
-        method: "GET"
-    }).then(function (response) {
-        createRow(response);
+        var customerID = localStorage.getItem("currentUser");
+        $.ajax({
+            url: "/api/market/" + customerID,
+            method: "GET"
+        }).then(function (response) {
+            createRow(response);
 
-        // make another ajax request get with symbol
+            // make another ajax request get with symbol
 
-        // update the existing table
-    });
+            // update the existing table
+        });
 
-
+    })
 });
