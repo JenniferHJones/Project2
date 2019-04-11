@@ -5,13 +5,26 @@ var regAuth = require("../config/middleware/registerAuth");
 module.exports = function (app) {
 
   app.get("/api/market/:id", function (req, res) {
+    // db.Stock.findById(1).then(function(d){console.log(d)})
     db.Transaction.findAll({
       where: {
         customerId: req.params.id
       },
     }).then(function (dbTransData) {
-
-      res.json(dbTransData);
+      Promise.all(dbTransData.map(function(trans){
+        console.log(trans.symbol)
+        return db.Stock.findOne( {
+          where: {
+              symbol: trans.symbol.toUpperCase() ,
+          },
+      })
+      })).then(function(stocks){
+        var newarray = dbTransData.map(function(d, index){
+          d.symbol = stocks[index]
+          return d
+        })
+        return res.json(newarray)
+      })
     });
   });
 
