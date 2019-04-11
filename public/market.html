@@ -53,7 +53,6 @@
                               <tbody>
                                  <tr>
                                     <td class="text-center " id="wallet-amount"></td>
-                                  
                                  </tr>
                               </tbody>
                            </table>
@@ -195,10 +194,8 @@
                                     </div>
                                  </div>
                               </div>
-
                            </div>
                         </div><!-- tabs -->
-
                </li>
             </ul>
          </nav>
@@ -213,7 +210,7 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="panel panel-default">
-                     <div class="panel-heading">Dash board
+                     <div class="panel-heading">Dashboard
                         <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel"
                            class="pull-right">
                            <em class="fa fa-minus"></em>
@@ -234,7 +231,7 @@
                               </tr>
                            </thead>
                            <tbody id="dashboard-body">
-                              
+                              <!-- Dashboard -->
                            </tbody>
                         </table>
                      </div>
@@ -252,8 +249,8 @@
                                     <li class="active"><a href="javascript:void(0);">1</a></li>
                                     <li><a href="javascript:void(0);">2</a></li>
                                     <li><a href="javascript:void(0);">3</a></li>
-                                    <li><a href="javascript:void(0);">4</a></li>
-                                    <li><a href="javascript:void(0);">5</a></li>
+                                    <!-- <li><a href="javascript:void(0);">4</a></li> -->
+                                    <!-- <li><a href="javascript:void(0);">5</a></li> -->
                                  </ul>
                                  <ul class="pagination pagination-sm pagi-margin">
                                     <li><a href="javascript:void(0);">Next</a></li>
@@ -314,7 +311,6 @@
                               </div>
                            </div>
                            <div id="chartContainer" class="h-500">
-
                            </div>
                         </div>
                      </div>
@@ -323,7 +319,6 @@
 
                <!-- Chart Ends Here -->
 
-               <!-- </div> -->
                <div class="col-md-3">
 
                   <!-- API News Starts Here -->
@@ -372,60 +367,13 @@
                            </div>
                         </div>
                      </a>
-                     <!-- <div class="list-group">
-                        <a href="#" class="list-group-item">
-                           <div class="media">
-                              <div class="media-body">
-                                 <small class="pull-right">2h</small>
-                                 <strong class="media-heading text-primary">James</strong>
-                                 <p><small>Posted by James@example</small></p>
-                                 <p class="mb-sm">
-                                    <small>some news about the purchased stock</small>
-                                 </p>
-                              </div>
-                           </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                           <div class="media">
-                              <div class="media-body">
-                                 <small class="pull-right">2h</small>
-                                 <strong class="media-heading text-primary">Jimmy</strong>
-                                 <p><small>Posted by Jimmy@example</small></p>
-                                 <p class="mb-sm">
-                                    <small>some news about the purchased stock</small>
-                                 </p>
-                              </div>
-                           </div>
-                        </a>
-                        <a href="#" class="list-group-item">
-                           <div class="media">
-                              <div class="media-body">
-                                 <small class="pull-right">2h</small>
-                                 <strong class="media-heading text-primary">Franky</strong>
-                                 <p><small>Posted by Franky@example</small></p>
-                                 <p class="mb-sm">
-                                    <small>some news about the purchased stock</small>
-                                 </p>
-                              </div>
-                           </div>
-                        </a>
-                     </div>
-                     <div class="panel-footer clearfix">
-                        <a href="#" class="pull-left">
-                           <small>Read All</small>
-                        </a>
-                        <a href="#" class="pull-right">
-                           <small>Dismiss All</small>
-                        </a> -->
                   </div>
-                  <!-- <div class="panel-footer clearfix">
-                           <p>Upcoming News</p>
-                        </div> -->
                </div>
             </div>
             </div>
             </div>
             <!-- Orders Book -->
+
             <!-- Open Orders -->
             <div class="row">
                <div class="col-md-12">
@@ -509,6 +457,7 @@
                   </div>
                </div>
             </div>
+
             <!-- My Order History -->
             <div class="row">
                <div class="col-md-12">
@@ -553,8 +502,8 @@
                                     <li class="active"><a href="javascript:void(0);">1</a></li>
                                     <li><a href="javascript:void(0);">2</a></li>
                                     <li><a href="javascript:void(0);">3</a></li>
-                                    <li><a href="javascript:void(0);">4</a></li>
-                                    <li><a href="javascript:void(0);">5</a></li>
+                                    <!-- <li><a href="javascript:void(0);">4</a></li> -->
+                                    <!-- <li><a href="javascript:void(0);">5</a></li> -->
                                  </ul>
                                  <ul class="pagination pagination-sm pagi-margin">
                                     <li><a href="javascript:void(0);">Next</a></li>
@@ -627,7 +576,7 @@
 
             </div> <!-- end container -->
          </footer>
-         <!-- end FOOTER -->
+         <!-- End FOOTER -->
       </section>
    </section>
    <script src="plugins/jquery/jquery.js"></script>
@@ -658,253 +607,266 @@
    <script src="js/newsAPI.js" type="text/javascript"></script>
    <script src="js/dashboard.js" type="text/javascript"></script>
 
-   <!-- start modal for wallet -->
-   !-- start modal for wallet -->
-            <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-               <div class="modal-dialog custom-modal panel-default" role="document">
-                 <div class="modal-content modal-window1">
-                   <div class="modal-header bg-primary">
-                     <h5 class="modal-title" id="walletModalTitle">Transfer Money</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                     </button>
-                   </div>
-                   <div class="modal-body">
-                        <div class="form-group">
-                              <label class="control-label">From Account</label>
-                              <input id="id-fromacct" type="text" name="fromacct" required class="form-control" readonly="readonly">
-                           </div>
-                        
-                     <div class="form-group">
-                        <label class="control-label">To Account</label>
-                        <input id="id-toacct" type="text" name="toacct" required class="form-control" readonly="readonly">
-                     </div>
-                    
-                     <div class="form-group">
-                        <label class="control-label">Date</label>
-                        <input type="date" name="currentdate" required data-parsley-equalto="#trans-date" class="form-control" id="trans-date">
-                     </div>
-                     <div class="form-group">
-                         
-                        <label class="control-label">Amount * </label>
-                        <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control" id="trans-amount">
-                     
-                     </div>
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary" id="transferBtn">Submit</button>
-                   </div>
-                 </div>
+   <!-- Start Modal for Wallet -->
+   <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog custom-modal panel-default" role="document">
+         <div class="modal-content modal-window1">
+            <div class="modal-header bg-primary">
+               <h5 class="modal-title" id="walletModalTitle">Transfer Money</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                  <label class="control-label">From Account</label>
+                  <input id="id-fromacct" type="text" name="fromacct" required class="form-control" readonly="readonly">
                </div>
-             </div>
-         <!-- modal for buy -->
-     
-             
-             <!-- Modal -->
-             <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-               <div class="modal-dialog custom-modal" role="document">
-                 <div class="modal-content">
-                   <div class="modal-header">
-                     <h5 class="modal-title" id="buyModal">Trade</h5>
-                     <p class="qnt-err-text text-c-red"></p>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                     </button>
-                   </div>
-                   <div class="modal-body">
-                        <div class="form-group">
-                              <label class="control-label">Account</label>
-                              <input id="id-acct" type="text" name="acct" required class="form-control" readonly="readonly">
-                           </div>
-                        
-                     <div class="form-group">
-                        <label class="control-label">Available Cash</label>
-                        <input id="cash" type="text" name="cash" required class="form-control" readonly="readonly">
-                     </div>
-                    
-                     <div class="row form-group">
-                        <!-- <div class="col-md-4">
+
+               <div class="form-group">
+                  <label class="control-label">To Account</label>
+                  <input id="id-toacct" type="text" name="toacct" required class="form-control" readonly="readonly">
+               </div>
+
+               <div class="form-group">
+                  <label class="control-label">Date</label>
+                  <input type="date" name="currentdate" required data-parsley-equalto="#trans-date" class="form-control"
+                     id="trans-date">
+               </div>
+               <div class="form-group">
+
+                  <label class="control-label">Amount * </label>
+                  <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control"
+                     id="trans-amount">
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" id="transferBtn">Submit</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Modal for Buy -->
+
+
+   <!-- Modal -->
+   <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog custom-modal" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="buyModal">Trade</h5>
+               <p class="qnt-err-text text-c-red"></p>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                  <label class="control-label">Account</label>
+                  <input id="id-acct" type="text" name="acct" required class="form-control" readonly="readonly">
+               </div>
+
+               <div class="form-group">
+                  <label class="control-label">Available Cash</label>
+                  <input id="cash" type="text" name="cash" required class="form-control" readonly="readonly">
+               </div>
+
+               <div class="row form-group">
+                  <!-- <div class="col-md-4">
                         <label class="control-label">Transaction</label>
                         <input type="text" name="transactaion" required data-parsley-equalto="#id-trans" class="form-control">
                         </div> -->
-                        <div class="col-md-5">
-                          
-                                 <label class="control-label">Transaction Type</label>
-                                 <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="transactionType"> <span id="opt-trans">Select</span> <span class="caret"></span>
-                                 </button>
-                                   <ul class="dropdown-menu">
-                                     <li><a class="dropdown-item" id="3" href="#" >Stock/ETF</a></li>
-                                     <li><a class="dropdown-item" id="4" href="#">Mutual Fund</a></li>
-                                     
-                                   </ul>
+                  <div class="col-md-5">
+
+                     <label class="control-label">Transaction Type</label>
+                     <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        id="transactionType"> <span id="opt-trans">Select</span> <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" id="3" href="#">Stock/ETF</a></li>
+                        <li><a class="dropdown-item" id="4" href="#">Mutual Fund</a></li>
+
+                     </ul>
+                  </div>
+                  <!-- </div> -->
+                  <!-- <div class="form-group"> -->
+                  <div class="col-md-7">
+                     <label class="control-label">Symbol </label>
+                     <!-- <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control" id="symbol"> -->
+                     <div class="input-group ">
+
+                        <input type="text" class="form-control text-left" placeholder="search" id="symbol-text">
+                        <div class="input-group-btn">
+                           <button type="button" data-toggle="dropdown"
+                              class="btn btn-primary form-btn-padding dropdown-toggle" id="searchSymbol">search
+                              <!-- <span class="caret"></span> -->
+                           </button>
                         </div>
-                        <!-- </div> -->
-                     <!-- <div class="form-group"> -->
-                        <div class="col-md-7">
-                        <label class="control-label">Symbol </label>
-                        <!-- <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control" id="symbol"> -->
-                        <div class="input-group ">
-                              
-                              <input type="text" class="form-control text-left" placeholder="search" id="symbol-text">
-                              <div class="input-group-btn">
-                                    <button type="button" data-toggle="dropdown" class="btn btn-primary form-btn-padding dropdown-toggle" id="searchSymbol">search
-                                    <!-- <span class="caret"></span> -->
-                                    </button>
-                                 </div>
-                        </div>
                      </div>
-                     </div>
-                     <div>
-                           <input type="hidden" class="form-control " placeholder="search" id="currentPrice" readonly="readonly">
-                     </div>
-                     <div class="row form-group">
-                           <div class="col-md-3">
-                                 <label class="control-label">Action </label>
-                                 <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">Select</span> <span class="caret"></span>
-                                 </button>
-                                   <ul class="dropdown-menu">
-                                     <li><a class="dropdown-item" id="1" href="#" >Buy</a></li>
-                                     <li><a class="dropdown-item" id="2" href="#">Sell </a></li>
-                                     
-                                   </ul>
-                           </div>
-                           <div class="col-md-4">
-                              <label class="control-label">Order Type</label>
-                              <button class="btn btn1 btn-md p-5 btn-secondary dropdown-toggle dropdown-toggle-split" type="button" data-toggle="dropdown" id="orderType"> <span id="opt2">Select</span> <span class="caret"></span>
-                              </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" id="5" href="#" >Market Order</a></li>
-                                  <li><a class="dropdown-item" id="6" href="#">Limit Order</a></li>
-                                </ul>
-                           </div>
-                           <div class="col-md-4">
-                              <label class="control-label">Quantity </label> 
-                              <input type="text" id="quantity" name="quantity" required data-parsley-equalto="#id-amount" class="form-control">
-                           
-                           </div>
-                     </div>
-                           
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary" id="order">Order</button>
-                   </div>
-                 </div>
+                  </div>
                </div>
-             </div>
-         <!-- end buy modal -->
-   <!-- start modal for profile -->
-   <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel" aria-hidden="true">
-         <div class="modal-dialog custom-modal" role="document">
-           <div class="modal-content">
-             <div class="modal-header">
+               <div>
+                  <input type="hidden" class="form-control " placeholder="search" id="currentPrice" readonly="readonly">
+               </div>
+               <div class="row form-group">
+                  <div class="col-md-3">
+                     <label class="control-label">Action </label>
+                     <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        id="options"> <span id="opt">Select</span> <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" id="1" href="#">Buy</a></li>
+                        <li><a class="dropdown-item" id="2" href="#">Sell </a></li>
+                     </ul>
+                  </div>
+                  <div class="col-md-4">
+                     <label class="control-label">Order Type</label>
+                     <button class="btn btn1 btn-md p-5 btn-secondary dropdown-toggle dropdown-toggle-split"
+                        type="button" data-toggle="dropdown" id="orderType"> <span id="opt2">Select</span> <span
+                           class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" id="5" href="#">Market Order</a></li>
+                        <li><a class="dropdown-item" id="6" href="#">Limit Order</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-md-4">
+                     <label class="control-label">Quantity </label>
+                     <input type="text" id="quantity" name="quantity" required data-parsley-equalto="#id-amount"
+                        class="form-control">
+
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" id="order">Order</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End Buy Modal -->
+
+   <!-- Start Modal for profile -->
+   <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog custom-modal" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
                <h5 class="modal-title" id="profileModalLabel">Manage Profile</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true">&times;</span>
                </button>
-             </div>
-          <div class="modal-body">
+            </div>
+            <div class="modal-body">
                <div class="form-group">
-                     <label class="control-label">Full Name</label>
-                     <input id="mp-name" type="text" name="mp-name" required class="form-control" readonly="readonly">
-                  </div>
-               
-            <div class="form-group">
-               <label class="control-label">Email</label>
-               <input id="mp-email" type="text" name="mp-email" required class="form-control" readonly="readonly">
-            </div>
+                  <label class="control-label">Full Name</label>
+                  <input id="mp-name" type="text" name="mp-name" required class="form-control" readonly="readonly">
+               </div>
 
-           <div>
-               <label class="control-label">Change Email </label>
-               <input type="text" id="mp-change-email" name="mp-change-email" required data-parsley-equalto="#mp-change-email" class="form-control">
-            
+               <div class="form-group">
+                  <label class="control-label">Email</label>
+                  <input id="mp-email" type="text" name="mp-email" required class="form-control" readonly="readonly">
+               </div>
+
+               <div>
+                  <label class="control-label">Change Email </label>
+                  <input type="text" id="mp-change-email" name="mp-change-email" required
+                     data-parsley-equalto="#mp-change-email" class="form-control">
+
+               </div>
+               <div>
+                  <label class="control-label">Change Password </label>
+                  <input type="text" name="mp-change-pwd" required data-parsley-equalto="#id-zip" class="form-control"
+                     id="mp-change-pwd">
+
+               </div>
             </div>
-            <div>
-               <label class="control-label">Change Password </label>
-               <input type="text" name="mp-change-pwd" required data-parsley-equalto="#id-zip" class="form-control" id="mp-change-pwd">
-            
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" id="update-profile">Update</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="update-profile">Update</button>
-          </div>
-        </div>
+         </div>
       </div>
-    </div>
-   
-    <!-- Manage Account Modal start here -->
-    <div class="modal fade custome-modal" id="manageAccountModal" tabindex="-1" role="dialog" aria-labelledby="manageAccountModalLabel" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-           <div class="modal-content">
-             <div class="modal-header">
+   </div>
+
+   <!-- Manage Account Modal start here -->
+   <div class="modal fade custome-modal" id="manageAccountModal" tabindex="-1" role="dialog"
+      aria-labelledby="manageAccountModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
                <h5 class="modal-title" id="manageAccountModalLabel">Manage Accounts</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true">&times;</span>
                </button>
-             </div>
-          <div class="modal-body">
+            </div>
+            <div class="modal-body">
                <button type="button" class="btn btn-secondary pull-right" id="mc-delete">Delete</button>
                <button type="button" class="btn btn-primary pull-right" id="mc-update">Update</button>
-              
-             <br>
+
+               <br>
                <p id="mc-bank-name">Bank Name : </p>
-             <p id="mc-bank-acctnum">Account Number : </p>
-             <p id="mc-bank-address">Billing Address  : </p>
-             <p id="mc-bank-zip">Zip : </p>
-              
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <!-- <button type="button" class="btn btn-primary" id="">Submit</button> -->
-          </div>
-        </div>
-    </div>
+               <p id="mc-bank-acctnum">Account Number : </p>
+               <p id="mc-bank-address">Billing Address : </p>
+               <p id="mc-bank-zip">Zip : </p>
+
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <!-- <button type="button" class="btn btn-primary" id="">Submit</button> -->
+            </div>
+         </div>
+      </div>
    </div>
-    <!-- manage account modal ends here -->
+   <!-- manage account modal ends here -->
 
-      <!-- profile modal ends here -->
-           <!-- start modal for setup-acct -->
-           <div class="modal fade" id="setupAcctModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-               <div class="modal-dialog custom-modal" role="document">
-                 <div class="modal-content">
-                   <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Account Setup</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                     </button>
-                   </div>
-                <div class="modal-body">
-                     <div class="form-group">
-                           <label class="control-label">Bank Name</label>
-                           <input id="bank-name" type="text" name="bankname" required class="form-control" >
-                        </div>
-                     
-                  <div class="form-group">
-                     <label class="control-label">Bank Account Number</label>
-                     <input id="bank-acctnum" type="text" name="bankacct" required class="form-control">
-                  </div>
+   <!-- profile modal ends here -->
+   <!-- start modal for setup-acct -->
+   <div class="modal fade" id="setupAcctModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog custom-modal" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Account Setup</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                  <label class="control-label">Bank Name</label>
+                  <input id="bank-name" type="text" name="bankname" required class="form-control">
+               </div>
 
-                 <div>
-                     <label class="control-label">Billing Address </label>
-                     <input type="text" id="billing-address" name="billaddress" required data-parsley-equalto="#bill-address" class="form-control">
-                  
-                  </div>
-                  <div>
-                     <label class="control-label">Zip </label>
-                     <input type="text" name="zip" required data-parsley-equalto="#id-zip" class="form-control" id="zip">
-                  
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="setUpAcctBtn">Submit</button>
-                </div>
-              </div>
+               <div class="form-group">
+                  <label class="control-label">Bank Account Number</label>
+                  <input id="bank-acctnum" type="text" name="bankacct" required class="form-control">
+               </div>
 
+               <div>
+                  <label class="control-label">Billing Address </label>
+                  <input type="text" id="billing-address" name="billaddress" required
+                     data-parsley-equalto="#bill-address" class="form-control">
+
+               </div>
+               <div>
+                  <label class="control-label">Zip </label>
+                  <input type="text" name="zip" required data-parsley-equalto="#id-zip" class="form-control" id="zip">
+
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" id="setUpAcctBtn">Submit</button>
+            </div>
+         </div>
+
+      </div>
    </div>
-</div>
 
    <script src="js/index.js" type="text/javascript"></script>
    <!--modal for wallet -->
@@ -939,61 +901,61 @@
       });
    </script>
    <!-- opt-trans -->
-   
-             <script src="js/index.js" type="text/javascript"></script>
-      <!--modal for wallet -->
-      <script type="text/javascript">
-         $(function(){
-           $("#1").click(function () {
-           $("#opt").text($(this).text());
-           });
-           $("#2").click(function () {
-           $("#opt").text($(this).text());
-           });
-          
+
+   <script src="js/index.js" type="text/javascript"></script>
+   <!--modal for wallet -->
+   <script type="text/javascript">
+      $(function () {
+         $("#1").click(function () {
+            $("#opt").text($(this).text());
          });
-         
-         </script>
-         <script type="text/javascript">
-            $(function(){
-              $("#3").click(function () {
-              $("#opt-trans").text($(this).text());
-              });
-              $("#4").click(function () {
-              $("#opt-trans").text($(this).text());
-              });
-             
-            });
-            
-            </script>
-             <script type="text/javascript">
-               $(function(){
-                 $("#5").click(function () {
-                 $("#opt2").text($(this).text());
-                 });
-                 $("#6").click(function () {
-                 $("#opt2").text($(this).text());
-                 });
-                
-               });
-               
-               </script>
-         <!-- opt-trans -->
-         <!-- Alert Modal -->
-      <div class="modal fade" id="alertModal" tabindex="10" role="dialog" aria-labelledby="modalInvalidNameImageURL"
+         $("#2").click(function () {
+            $("#opt").text($(this).text());
+         });
+
+      });
+
+   </script>
+   <script type="text/javascript">
+      $(function () {
+         $("#3").click(function () {
+            $("#opt-trans").text($(this).text());
+         });
+         $("#4").click(function () {
+            $("#opt-trans").text($(this).text());
+         });
+
+      });
+
+   </script>
+   <script type="text/javascript">
+      $(function () {
+         $("#5").click(function () {
+            $("#opt2").text($(this).text());
+         });
+         $("#6").click(function () {
+            $("#opt2").text($(this).text());
+         });
+
+      });
+
+   </script>
+   <!-- opt-trans -->
+   <!-- Alert Modal -->
+   <div class="modal fade" id="alertModal" tabindex="10" role="dialog" aria-labelledby="modalInvalidNameImageURL"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
             <div class="modal-body">
-                  <p class="lead"></p>
+               <p class="lead"></p>
             </div>
             <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
          </div>
       </div>
-      </div>
+   </div>
 
-   </body>
+</body>
 
 </html>
