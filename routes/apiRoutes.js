@@ -1,6 +1,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
 var regAuth = require("../config/middleware/registerAuth");
+var keys = require("../keys");
 
 module.exports = function (app) {
 
@@ -11,15 +12,15 @@ module.exports = function (app) {
         customerId: req.params.id
       },
     }).then(function (dbTransData) {
-      Promise.all(dbTransData.map(function(trans){
-        console.log(trans.symbol)
-        return db.Stock.findOne( {
+      Promise.all(dbTransData.map(function (trans) {
+        // console.log(trans.symbol)
+        return db.Stock.findOne({
           where: {
-              symbol: trans.symbol.toUpperCase() ,
+            symbol: trans.symbol.toUpperCase(),
           },
-      })
-      })).then(function(stocks){
-        var newarray = dbTransData.map(function(d, index){
+        })
+      })).then(function (stocks) {
+        var newarray = dbTransData.map(function (d, index) {
           d.symbol = stocks[index]
           return d
         })
@@ -29,12 +30,9 @@ module.exports = function (app) {
   });
 
   // API routes - Requires the newsapi package and News API Key.
-  // This file uses the Node.js server side NewAPI. 
-  // The file has two routes that the data sent to server and data is return to the client.
-
-  const NewsAPI = require('newsapi');
-  const newsapi = new NewsAPI('414c176d6a044edb8222137ce0a3513f');
-
+  var NewsAPI = require('newsapi');
+  var newsapi = new NewsAPI(keys.news.code);
+  
   // This get returns the top business headlines 
   app.get("/api/newsData", function (req, res) {
     newsapi.v2.topHeadlines({
@@ -48,13 +46,13 @@ module.exports = function (app) {
   });
   // This post sends inputSearchValue to the newsapi and returns data on search value.
   app.post("/api/newsData", function (req, res) {
-    console.log("Sohail's Body", req.body);
+    // console.log("Sohail's Body", req.body);
     newsapi.v2.everything({
       q: req.body.stockName,
       sortBy: 'relevancy',
       page: 2
     }).then(response => {
-      console.log("This is Sohail's", response);
+      // console.log("This is Sohail's", response);
       res.json(response);
     });
   });
@@ -68,14 +66,14 @@ module.exports = function (app) {
         CustomerID: req.query.currentUser
       }
     }).then(function (dbTransaction) {
-      console.log("received return", dbTransaction);
+      // console.log("received return", dbTransaction);
       res.json(dbTransaction);
     });
   })
 
   // Save customer bank acct in database
   app.post("/api/setupacct", function (req, res) {
-    console.log(req.body, "req.body**setupacct******");
+    // console.log(req.body, "req.body**setupacct******");
     db.CustomerBankAcct.create(req.body).then(function (dbCustomerBankAcct) {
       res.status(200).end();
     });
@@ -103,15 +101,15 @@ module.exports = function (app) {
     }).then(function (dbCustomer) {
       res.json(dbCustomer);
     })
-    .catch(function (err) {
-      console.log(err);
-      res.json(err);
-    });
+      .catch(function (err) {
+        console.log(err);
+        res.json(err);
+      });
   });
 
   // Available cash : acct balance
   app.get("/api/vw_CustomerBalance/:CustomerId", function (req, res) {
-    console.log(req.body, "req.body****vw_CustomerBalance****");
+    // console.log(req.body, "req.body****vw_CustomerBalance****");
     db.Transfer.sum('creditAmount', { where: { CustomerId: req.params.CustomerId } })
       .then(function (dbTransfer) {
         res.json(dbTransfer);
@@ -148,7 +146,7 @@ module.exports = function (app) {
 
   // Save transfer amount in database
   app.post("/api/transfer", function (req, res) {
-    console.log(req.body, "req.body*****transfer***");
+    // console.log(req.body, "req.body*****transfer***");
     db.Transfer.create(req.body).then(function (dbTransfer) {
       res.status(200).end();
     });
@@ -160,7 +158,7 @@ module.exports = function (app) {
       .then(function (dbStocktime) {
         stockTime = dbStocktime;
 
-        console.log(stockTime);
+        // console.log(stockTime);
         db.Stock.findOne({
           where: {
             timestamps: dbStocktime,
@@ -174,7 +172,7 @@ module.exports = function (app) {
 
   // Save transfer amount in database
   app.get("/api/transfer", function (req, res) {
-    console.log(req.body, "req.body********");
+    // console.log(req.body, "req.body********");
 
     db.Transfer.findAll({
 
@@ -189,7 +187,7 @@ module.exports = function (app) {
 
   // Save transfer amount in database
   app.post("/api/transfer", function (req, res) {
-    console.log(req.body, "req.body********");
+    // console.log(req.body, "req.body********");
     db.Transfer.create(req.body).then(function (dbTransfer) {
       res.status(200).end();
 
@@ -199,7 +197,7 @@ module.exports = function (app) {
 
   // Create a new order
   app.post("/api/order", function (req, res) {
-    console.log(req.body, "req.body***Order*****");
+    // console.log(req.body, "req.body***Order*****");
     db.Transaction.create(req.body).then(function (dbTransaction) {
       res.status(200).end();
 
@@ -222,7 +220,7 @@ module.exports = function (app) {
 
   // Save transfer amount in database
   app.post("/api/setupacct", function (req, res) {
-    console.log(req.body, "req.body********");
+    // console.log(req.body, "req.body********");
     db.CustomerBankAcct.create(req.body).then(function (dbCustomerBankAcct) {
       res.status(200).end();
     });
@@ -232,8 +230,8 @@ module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy. If customer has valid login
   // credentials, send them to the market page, otherwise the customer will be sent an error
   app.post("/api/login", passport.authenticate("local"), function (req, res) {
-    console.log("request body", req.body);
-    console.log("request user", req.user);
+    // console.log("request body", req.body);
+    // console.log("request user", req.user);
 
     // Since we're doing a POST with javascript, we can't redirect that post into a GET request, so
     // send customer back the route to the sign in page because the redirect will happen on the front end.
@@ -256,7 +254,7 @@ module.exports = function (app) {
     // Adds TFY prefix to value
     var tradeAcct = "TFY" + tradeAcctVal;
 
-    console.log("this is the request.body", req.body);
+    // console.log("this is the request.body", req.body);
     db.Customer.create({
       fName: req.body.name,
       tradeAcct: tradeAcct,
