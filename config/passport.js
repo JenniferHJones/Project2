@@ -11,14 +11,14 @@ passport.use(
       usernameField: "email"
     },
     function (email, password, done) {
-      console.log("is this working for start");
+      // console.log("is this working for start");
       // When a customer tries to sign in this code runs
       db.Customer.findOne({
         where: {
           email: email
         }
       }).then(function (dbCustomer) {
-        console.log("*****Is this working for email?*****", dbCustomer);
+        // console.log("*****Is this working for email?*****", dbCustomer);
         // If there's no customer with the given email
         if (!dbCustomer) {
           console.log("*****Incorrect email!*****")
