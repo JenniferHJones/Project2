@@ -8,7 +8,7 @@ This application was written for project 2 of the UCD Coding Bootcamp. The landi
 ## Technology
 * AJAX
 * API - News
-* Candlestick-chart
+* CanvasJS-chart
 * CSS
 * CSS Bootstrap
 * Dotenv
