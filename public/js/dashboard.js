@@ -4,8 +4,7 @@ $(document).ready(function () {
         // script to append data to dashboard 
         var createRow = function (data) {
 
-
-
+            $("#dashboard-body").empty();
             for (var i = 0; i < data.length; i++) {
                 // calculate gains
                 var dailyGain = Number(data[i].price - data[i].symbol.close);
@@ -35,6 +34,7 @@ $(document).ready(function () {
                 }
 
                 $("#dashboard-body").append(tableRow);
+                
             }
         };
 
@@ -44,10 +44,6 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             createRow(response);
-
-            // make another ajax request get with symbol
-
-            // update the existing table
         });
 
     })
