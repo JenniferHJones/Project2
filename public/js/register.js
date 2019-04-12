@@ -37,16 +37,10 @@ $(document).ready(function () {
     }).done(function (data) {
       $("#tab_default_1").removeClass("active");
       $("#tab_default_2").addClass("active");
-      // window.location.replace("/market");
-      // If there's an error, handle it by throwing up a bootstrap alert
     }).fail(function(err) {
       $("#regErrorMessage").text("This email already registered. Please sign in.")
       console.log("login error", err);
     });
   }
 
-  // function handleLoginErr(err) {
-  //   $("#alert .msg").text(err.responseJSON);
-  //   $("#alert").fadeIn(500);
-  // }
 });
