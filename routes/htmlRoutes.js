@@ -14,6 +14,10 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/prices.html"));
   });
 
+  app.get("/symbol", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/symbol.html"));
+  });
+
   //======================= PASSPORT ==============================
 
   // Here we add the isAuthenticated middleware to this route. If a customer who is not logged in
