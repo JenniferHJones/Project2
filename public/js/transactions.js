@@ -9,6 +9,8 @@ $(document).ready(function () {
 
     $("#notification-click").on("click", function (event) {
 
+        shortOrderHistory.empty();
+
         // Determines ID of logged in customer
         var url = window.location.search;
         var customerID;
@@ -29,7 +31,6 @@ $(document).ready(function () {
 
         // Function to append constructed HTML to notification header on Market page
         function initializeRowsShort() {
-            // shortOrderHistory.empty();
             var transactionsToAddShort = [];
             for (var i = 0; i < transactions.length; i++) {
                 transactionsToAddShort.push(createNewRowShort(transactions[i]));
@@ -96,7 +97,6 @@ $(document).ready(function () {
             newOrderHistoryRow.append($("<td>" + "$" + transactions.price + "</td>"));
             newOrderHistoryRow.append($("<td>" + transactions.quantity + "</td>"));
             newOrderHistoryRow.append($("<td>" + formattedTotalCost + "</td>"));
-            // newOrderHistoryRow.append($("<td>" + "" + "</td>"));
 
             return newOrderHistoryRow;
         };
