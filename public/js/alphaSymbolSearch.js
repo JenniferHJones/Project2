@@ -1,4 +1,5 @@
-// Alpha Advantage API stock symbol search by company name.  
+// Alpha Advantage API stock symbol search by company name
+var keys = require("../../keys");
 
 searchForSymbolByCompany();
 
@@ -7,7 +8,7 @@ function searchForSymbolByCompany(){
   $("#searchButtonSymbol").on("click",function(event){  
     event.preventDefault();
     var companyName = document.getElementById("search-term-companyName").value;
-    var queryURL ="https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + companyName + "&apikey=56MB2XYF4JONDCXQ";
+    var queryURL ="https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + companyName + "&apikey=" + keys.alpha.code;
 
     $.ajax({
     url: queryURL,
