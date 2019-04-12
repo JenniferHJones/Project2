@@ -16,13 +16,18 @@
       integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
    <link rel="stylesheet" href="app/css/app.css">
    <script src="plugins/modernizr/modernizr.js"></script>
+
+
 </head>
+
 <body>
+
    <section class="wrapper">
       <nav class="navbar navbar-default navbar-top navbar-fixed-top">
          <div class="navbar-header">
             <a href="#" class="navbar-brand">
                <div class="brand-logo"><i class="fas fa-dollar-sign"></i> TRADE-FY</div>
+               <div class="brand-logo-collapsed"><i class="fa fa-doller"></i></div>
             </a>
          </div>
          <div class="nav-wrapper">
@@ -34,6 +39,10 @@
                   </a>
                   <ul class="dropdown-menu col-md-2 col-sm-4 col-xs-10">
                      <li>
+                        <!-- <div class="text-center m-t-20">
+                           <p >Available Money</p>
+                           <p id="availableMoney"></p>
+                        </div> -->
                         <div class="table-responsive">
                            <table class="table table-striped table-bordered table-hover">
                               <thead>
@@ -133,12 +142,16 @@
                                              <span class="input-group-addon btn-primary group-btn-hover darkformfield"
                                                 data-target="#profileModal" data-toggle="modal"></i> Manage
                                                 Profile</span>
+                                             <!-- <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
                                           </div>
                                           <div class="m-t-9">
                                              <div class="input-group col-sm-12 m-b">
+                                                <!-- <div class="input-group-btn"> -->
+                                                <!-- <span class="input-group-addon btn-primary group-btn-hover"><i class="fa fa-angle-double-up"></i> ShortCodes</span> -->
                                                 <button type="button" data-target="#setupAcctModal" data-toggle="modal"
                                                    class="btn btn-primary dropdown-toggle btn-block" id="setup-acct">Set
                                                    Up Account
+                                                   <!-- <span class="caret"></span> -->
                                                 </button>
                                              </div>
                                           </div>
@@ -146,34 +159,55 @@
                                              <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
                                                 <button type="button" data-target="#manageAccountModal"
                                                    data-toggle="modal" class="btn btn-danger  btn-block">Manage Accounts
+                                                   <!-- <span class="caret"></span> -->
                                                 </button>
+                                                <!-- <ul role="menu" class="dropdown-menu">
+                                               <li><a href="javascript:void(0);">Limit</a>
+                                               </li>
+                                               <li><a href="javascript:void(0);">Conditional</a>
+                                               </li>
+                                            </ul> -->
                                              </div>
                                              <div class="btn-group m-t-9 col-md-12 col-sm-12 col-xs-12">
+                                                <!-- <a href="/price"><button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle btn-block"></a>Live Pricing -->
                                                 <a class="btn btn-primary btn-block" href="/prices" role="button"
                                                    target="_blank">Live Pricing</a>
+                                                <!-- <span class="caret"></span> -->
                                                 </button>
+
                                              </div>
                                           </div>
                                           <div class="m-t-9">
                                              <div class="input-group col-sm-12 m-b" id="sym">
+                                                <!-- <a class="btn btn-primary btn-block " href="/searchSymbol" role="button" target="_blank">Search Symbol</a>   -->
                                                 <span
                                                    class="input-group-addon btn-primary group-btn-hover darkformfield"
-                                                   href="/symbol" role="button" target="_blank"></i>Find
+                                                   data-target="#profileModal" data-toggle="modal"></i>Find
                                                    Symbol</span>
+                                                <!-- <span class="input-group-addon btn-block"><i class="fa fa-btc">Symbol Search</i></span> -->
+                                                <!-- <input type="text" placeholder="0.00000000" class="form-control text-right"> -->
                                              </div>
                                           </div>
+                                          <!-- <div class="m-t-9">
+                                         <button type="button" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Buy Siacoin</button>
+                                      </div> -->
                                        </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                        </div>
+                        </div><!-- tabs -->
                </li>
             </ul>
          </nav>
       </aside>
       <section>
          <section class="main-content">
+            <!-- <button type="button" class="btn btn-labeled btn-primary pull-right">
+               <span class="btn-label"><i class="fa fa-dollar"></i>
+               </span>Goto Wallet</button> -->
+            <!-- <h3>Dashboard
+               </h3> -->
             <div class="row">
                <div class="col-md-12">
                   <div class="panel panel-default">
@@ -187,16 +221,18 @@
                         <table class="table table-bordered table-hover">
                            <thead>
                               <tr>
+                                 <!-- <th><i class="fa fa-plus"></i></th> -->
                                  <th>Symbol</th>
                                  <th>Last Price</th>
                                  <th>Todays Gain/Loss</th>
                                  <th>Total Gain/Loss</th>
                                  <th>Current Value</th>
                                  <th>Quantity</th>
+
                               </tr>
                            </thead>
                            <tbody id="dashboard-body">
-                           <!-- Dashboard -->
+                              <!-- Dashboard -->
                            </tbody>
                         </table>
                      </div>
@@ -214,6 +250,8 @@
                                     <li class="active"><a href="javascript:void(0);">1</a></li>
                                     <li><a href="javascript:void(0);">2</a></li>
                                     <li><a href="javascript:void(0);">3</a></li>
+                                    <!-- <li><a href="javascript:void(0);">4</a></li> -->
+                                    <!-- <li><a href="javascript:void(0);">5</a></li> -->
                                  </ul>
                                  <ul class="pagination pagination-sm pagi-margin">
                                     <li><a href="javascript:void(0);">Next</a></li>
@@ -229,6 +267,31 @@
                </div>
             </div>
             </div>
+            <!-- First Row Ends Here -->
+            <!-- <div class="row">
+                        <div class="col-lg-12">
+                           <div class="panel panel-default">
+                              <div class="panel-heading">All Markets
+                                 <a href="javascript:void(0);" data-perform="panel-dismiss" data-toggle="tooltip" title="" class="pull-right" data-original-title="Close Panel">
+                                 <em class="fa fa-times"></em>
+                                 </a>
+                                 <a href="javascript:void(0);" data-perform="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
+                                 <em class="fa fa-plus"></em>
+                                 </a>
+                              </div>
+                              <div class="panel-wrapper collapse">
+                                 <div class="panel panel-default">
+                                    <div class="panel-heading">All Markets |
+                                       <small>All Availble Markets</small>
+                                    </div>
+                                    <div class="panel-body">
+                                                                           </div>
+                                 </div>
+                                 <div class="panel-footer">All Markets</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div> -->
             <!-- Chart Starts Here -->
             <div class="row">
                <div class="col-lg-9">
@@ -243,6 +306,7 @@
                                  <div class="input-group-btn">
                                     <button type="button" data-toggle="dropdown"
                                        class="btn btn-primary form-btn-padding dropdown-toggle" id="chartSearch">search
+                                       <!-- <span class="caret"></span> -->
                                     </button>
                                  </div>
                               </div>
@@ -253,8 +317,11 @@
                      </div>
                   </div>
                </div>
+
                <!-- Chart Ends Here -->
+
                <div class="col-md-3">
+
                   <!-- API News Starts Here -->
                   <div class="panel panel-default">
                      <div class="panel-heading">
@@ -306,6 +373,8 @@
             </div>
             </div>
             </div>
+            <!-- Orders Book -->
+
             <!-- Open Orders -->
             <div class="row">
                <div class="col-md-12">
@@ -327,18 +396,21 @@
                                  <th>Price</th>
                                  <th>Total Cost</th>
                                  <th>Status</th>
+
                               </tr>
                            </thead>
                            <tbody>
                               <tr>
                                  <td><i class="fa fa-minus"></i></td>
                                  <td>
+
                                  </td>
                                  <td></td>
                                  <td></td>
                                  <td></td>
                                  <td></td>
                                  <td>
+
                                  </td>
 
                               </tr>
@@ -352,7 +424,9 @@
                                  <td></td>
                                  <td></td>
                                  <td>
+
                                  </td>
+
                               </tr>
                            </tbody>
                         </table>
@@ -400,16 +474,18 @@
                         <table class="table table-bordered table-hover">
                            <thead>
                               <tr>
+                                 <!-- <th><i class="fa fa-plus"></i></th> -->
                                  <th>Order Date</th>
                                  <th>Type</th>
                                  <th>Symbol</th>
                                  <th>Price</th>
                                  <th>Quantity</th>
                                  <th>Total Cost</th>
+                                 <!-- <th>Status</th> -->
                               </tr>
                            </thead>
                            <tbody class="order-history">
-                           <!-- Transactions -->
+                              <!-- Transactions -->
                            </tbody>
                         </table>
                      </div>
@@ -428,6 +504,8 @@
                                     <li class="active"><a href="javascript:void(0);">1</a></li>
                                     <li><a href="javascript:void(0);">2</a></li>
                                     <li><a href="javascript:void(0);">3</a></li>
+                                    <!-- <li><a href="javascript:void(0);">4</a></li> -->
+                                    <!-- <li><a href="javascript:void(0);">5</a></li> -->
                                  </ul>
                                  <ul class="pagination pagination-sm pagi-margin">
                                     <li><a href="javascript:void(0);">Next</a></li>
@@ -494,7 +572,10 @@
                         <li><a href="#">FAQ</a></li>
                      </ul>
                   </div>
+
                </div> <!-- end row -->
+
+
             </div> <!-- end container -->
          </footer>
          <!-- End FOOTER -->
@@ -518,14 +599,15 @@
    <script src="tradify/exporting.js"></script>
    <script src="plugins/datatable/extensions/ColVis/js/dataTables.colVis.js"></script>
    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+   <!-- <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script> -->
    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+   <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
    <script src="plugins/fastclick/fastclick.js"></script>
    <script src="app/js/tradify.js"></script>
-   <script src="js/index.js" type="text/javascript"></script>
+   </script>
    <script src="js/transactions.js" type="text/javascript"></script>
    <script src="js/newsAPI.js" type="text/javascript"></script>
    <script src="js/dashboard.js" type="text/javascript"></script>
-   
 
    <!-- Start Modal for Wallet -->
    <div class="modal fade" id="walletModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -543,16 +625,19 @@
                   <label class="control-label">From Account</label>
                   <input id="id-fromacct" type="text" name="fromacct" required class="form-control" readonly="readonly">
                </div>
+
                <div class="form-group">
                   <label class="control-label">To Account</label>
                   <input id="id-toacct" type="text" name="toacct" required class="form-control" readonly="readonly">
                </div>
+
                <div class="form-group">
                   <label class="control-label">Date</label>
                   <input type="date" name="currentdate" required data-parsley-equalto="#trans-date" class="form-control"
                      id="trans-date">
                </div>
                <div class="form-group">
+
                   <label class="control-label">Amount * </label>
                   <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control"
                      id="trans-amount">
@@ -566,6 +651,9 @@
       </div>
    </div>
    <!-- Modal for Buy -->
+
+
+   <!-- Modal -->
    <div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog custom-modal" role="document">
@@ -582,12 +670,19 @@
                   <label class="control-label">Account</label>
                   <input id="id-acct" type="text" name="acct" required class="form-control" readonly="readonly">
                </div>
+
                <div class="form-group">
                   <label class="control-label">Available Cash</label>
                   <input id="cash" type="text" name="cash" required class="form-control" readonly="readonly">
                </div>
+
                <div class="row form-group">
+                  <!-- <div class="col-md-4">
+                        <label class="control-label">Transaction</label>
+                        <input type="text" name="transactaion" required data-parsley-equalto="#id-trans" class="form-control">
+                        </div> -->
                   <div class="col-md-5">
+
                      <label class="control-label">Transaction Type</label>
                      <button class="btn btn1 btn-md btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                         id="transactionType"> <span id="opt-trans">Select</span> <span class="caret"></span>
@@ -595,15 +690,21 @@
                      <ul class="dropdown-menu">
                         <li><a class="dropdown-item" id="3" href="#">Stock/ETF</a></li>
                         <li><a class="dropdown-item" id="4" href="#">Mutual Fund</a></li>
+
                      </ul>
                   </div>
+                  <!-- </div> -->
+                  <!-- <div class="form-group"> -->
                   <div class="col-md-7">
                      <label class="control-label">Symbol </label>
+                     <!-- <input type="text" name="amount" required data-parsley-equalto="#id-amount" class="form-control" id="symbol"> -->
                      <div class="input-group ">
+
                         <input type="text" class="form-control text-left" placeholder="search" id="symbol-text">
                         <div class="input-group-btn">
                            <button type="button" data-toggle="dropdown"
                               class="btn btn-primary form-btn-padding dropdown-toggle" id="searchSymbol">search
+                              <!-- <span class="caret"></span> -->
                            </button>
                         </div>
                      </div>
@@ -638,6 +739,7 @@
                      <label class="control-label">Quantity </label>
                      <input type="text" id="quantity" name="quantity" required data-parsley-equalto="#id-amount"
                         class="form-control">
+
                   </div>
                </div>
             </div>
@@ -649,6 +751,7 @@
       </div>
    </div>
    <!-- End Buy Modal -->
+
    <!-- Start Modal for profile -->
    <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel"
       aria-hidden="true">
@@ -665,19 +768,23 @@
                   <label class="control-label">Full Name</label>
                   <input id="mp-name" type="text" name="mp-name" required class="form-control" readonly="readonly">
                </div>
+
                <div class="form-group">
                   <label class="control-label">Email</label>
                   <input id="mp-email" type="text" name="mp-email" required class="form-control" readonly="readonly">
                </div>
+
                <div>
                   <label class="control-label">Change Email </label>
                   <input type="text" id="mp-change-email" name="mp-change-email" required
                      data-parsley-equalto="#mp-change-email" class="form-control">
+
                </div>
                <div>
                   <label class="control-label">Change Password </label>
                   <input type="text" name="mp-change-pwd" required data-parsley-equalto="#id-zip" class="form-control"
                      id="mp-change-pwd">
+
                </div>
             </div>
             <div class="modal-footer">
@@ -687,7 +794,7 @@
          </div>
       </div>
    </div>
-    <!-- End Modal for Profile -->
+
    <!-- Manage Account Modal start here -->
    <div class="modal fade custome-modal" id="manageAccountModal" tabindex="-1" role="dialog"
       aria-labelledby="manageAccountModalLabel" aria-hidden="true">
@@ -702,19 +809,24 @@
             <div class="modal-body">
                <button type="button" class="btn btn-secondary pull-right" id="mc-delete">Delete</button>
                <button type="button" class="btn btn-primary pull-right" id="mc-update">Update</button>
+
                <br>
                <p id="mc-bank-name">Bank Name : </p>
                <p id="mc-bank-acctnum">Account Number : </p>
                <p id="mc-bank-address">Billing Address : </p>
                <p id="mc-bank-zip">Zip : </p>
+
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-           </div>
+               <!-- <button type="button" class="btn btn-primary" id="">Submit</button> -->
+            </div>
          </div>
       </div>
    </div>
    <!-- manage account modal ends here -->
+
+   <!-- profile modal ends here -->
    <!-- start modal for setup-acct -->
    <div class="modal fade" id="setupAcctModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -731,20 +843,24 @@
                   <label class="control-label">Bank Name</label>
                   <input id="bank-name" type="text" name="bankname" required class="form-control">
                </div>
+
                <div class="form-group">
                   <label class="control-label">Bank Account Number</label>
                   <input id="bank-acctnum" type="text" name="bankacct" placeholder="9-digits" required
                      class="form-control">
                </div>
+
                <div>
                   <label class="control-label">Billing Address </label>
                   <input type="text" id="billing-address" name="billaddress" required
                      data-parsley-equalto="#bill-address" class="form-control">
+
                </div>
                <div>
                   <label class="control-label">Zip </label>
                   <input type="text" name="zip" required data-parsley-equalto="#id-zip" placeholder="5-digits"
                      class="form-control" id="zip">
+
                </div>
             </div>
             <div class="modal-footer">
@@ -752,8 +868,11 @@
                <button type="button" class="btn btn-primary" id="setUpAcctBtn">Submit</button>
             </div>
          </div>
+
       </div>
    </div>
+
+   <script src="js/index.js" type="text/javascript"></script>
    <!--modal for wallet -->
    <script type="text/javascript">
       $(function () {
@@ -785,7 +904,7 @@
          });
       });
    </script>
-
+   <!-- opt-trans -->
    <!-- Alert Modal -->
    <div class="modal fade" id="alertModal" tabindex="10" role="dialog" aria-labelledby="modalInvalidNameImageURL"
       aria-hidden="true">
@@ -800,5 +919,7 @@
          </div>
       </div>
    </div>
+
 </body>
+
 </html>
