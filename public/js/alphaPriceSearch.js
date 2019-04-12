@@ -1,6 +1,6 @@
 // Alpha Advantage API
-// This file has a function that searches the Alpha Advantage Api for the company stock pricing data by
-// company stock symbol.
+// This searches for the company stock pricing data by stock symbol
+var keys = require("../../keys");
 
 searchPriceBySymbol();
 
@@ -9,7 +9,7 @@ function searchPriceBySymbol(){
   $("#searchButtonSymbol").on("click",function(event){  
     event.preventDefault();
     var symbol = document.getElementById("search-term-symbol").value;
-    var queryURL ="https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=56MB2XYF4JONDCXQ";
+    var queryURL ="https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=" + keys.alpha.code;
 
     $.ajax({
     url: queryURL,
