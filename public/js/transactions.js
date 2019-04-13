@@ -41,8 +41,9 @@ $(document).ready(function () {
         // Function to construct HTML
         function createNewRowShort(transactions) {
             var formattedDate = new Date(transactions.createdAt);
+            console.log(formattedDate);
             formattedDate = moment(formattedDate).format("DD/MM/YYYY");
-
+            console.log(formattedDate);
             var newShortOrderHistoryRow = $("<tr>");
             newShortOrderHistoryRow.append($("<td>" + transactions.action + " " + transactions.symbol + "</td>"));
             newShortOrderHistoryRow.append($("<td>" + formattedDate + "</td>"));
@@ -85,8 +86,9 @@ $(document).ready(function () {
         // Function to construct HTML
         function createNewRow(transactions) {
             var formattedDate = new Date(transactions.createdAt);
+            console.log(formattedDate);
             formattedDate = moment(formattedDate).format("DD/MM/YYYY");
-
+            console.log(formattedDate);
             var totalCost = transactions.price * transactions.quantity;
             var formattedTotalCost = totalCost.toLocaleString(undefined, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
