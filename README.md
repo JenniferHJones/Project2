@@ -1,5 +1,7 @@
 # Project 2: $ TRADE-FY (Trade For Yourself)
 
+[Trade-FY presentation link](https://1drv.ms/p/s!Ai2IBICnEzkUiRRIhuN6CJIehdAF)
+
 [Trade-FY application link](https://floating-headland-19856.herokuapp.com/)
 
 ## Description
