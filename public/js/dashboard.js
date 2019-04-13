@@ -18,12 +18,17 @@ $(document).ready(function () {
                 //Ends Here
                 // calculate gains
                 // var dailyGain = Number(data[i].price - data[i].symbol.close);
-                var dailyGain = Number(lastPrice - data[i].price);
-                var totalGain = dailyGain.toFixed(2);
-
                 var quantity = data[i].quantity;
-                var currentValue = lastPrice * quantity; 
-                var costBasis = data[i].price * quantity;
+                var dailyGain = (Number(lastPrice - data[i].price)).toFixed(2);
+
+                var totalGain = (dailyGain*quantity).toFixed(2);
+              
+                // var DeltaGainToday = Number(lastPrice - data[i].price)
+               // var DeltaGainToday = Number(lastPrice - data[i].price)
+
+                
+                var currentValue = (lastPrice * quantity).toFixed(2); 
+                var costBasis = (data[i].price * quantity).toFixed(2);
 
                 var tableRow = $("<tr>");
                 tableRow.append($("<td>" + data[i].symbol.symbol + "</td>"));
@@ -32,30 +37,28 @@ $(document).ready(function () {
                var className1 = "todayGain" + i ;
                var className2 = "totalGain" + i ;
              
-                tableRow.append($("<td class=className1>" + "$" + totalGain + "</td>"));
-                tableRow.append($("<td class=className2>" + "$" + totalGain + "</td>"));
+                tableRow.append($("<td class='className1'>" + "$" + totalGain + "</td>"));
+                tableRow.append($("<td class='className2'>" + "$" + totalGain + "</td>"));
                 tableRow.append($("<td>" + "$" + currentValue + "</td>"));
                 tableRow.append($("<td>" + data[i].quantity + "</td>"));
                 tableRow.append($("<td>" + costBasis + "</td>"));
 
                 // change color of gain if - or +
                 if (dailyGain >= 0) {
-                    //  $(".className1").addClass("green");
-                    $(".className1").css("color" , "blue");
+                    $(".className1").css("color" , "green");
                 } else if (dailyGain < 0) {
-                    $(".className1").css("color" , "red");
-                    // $(".className1").addClass("green");
+                    $(".className2").css("color" , "green");
 
                 }
 
-                if (dailyGain >= 0) {
-                    // $(".i").addClass("green");
-                    $(".className2").css("color" , "blue");
-                } else if (dailyGain < 0) {
-                    // $(".totalGain").addClass("red");
-                    $(".className2").css("color" , "red");
+                // if (totalGain >= 0) {
+                //     // $(".i").addClass("green");
+                //     $(".className2").css("color" , "green");
+                // } else if (totalGain < 0) {
+                //     // $(".totalGain").addClass("red");
+                //     $(".className2").css("color" , "red");
 
-                }
+                // }
 
                 $("#dashboard-body").append(tableRow);
                 

@@ -315,7 +315,6 @@ $("#mc-update").on("click", function (e) {
 
 });
 
-
 $("#chartSearch").on("click", function (event) {
 
   var symbol = $("#text-chart").val().trim();
@@ -350,7 +349,7 @@ $("#chartSearch").on("click", function (event) {
   if (symbol !=="" || symbol !==null) {
     $.get("/api/stockDailyJSON/" + symbol, parseData);
   } else {
-    $.get("/api/stockDailyJSON/" + AMZN, parseData);
+    $.get("/api/stockDailyJSON/" + DJI, parseData);
   }
 
   function parseData(result) {
