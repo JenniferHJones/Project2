@@ -29,7 +29,7 @@ module.exports = function (app) {
     });
   });
 
-  // API routes - Requires the newsapi package and News API Key.
+  // API routes - Requires the newsapi package and News API Key
   var NewsAPI = require('newsapi');
   var newsapi = new NewsAPI(keys.news.code);
   
@@ -44,7 +44,7 @@ module.exports = function (app) {
       res.json(response);
     });
   });
-  // This post sends inputSearchValue to the newsapi and returns data on search value.
+  // This post sends inputSearchValue to the newsapi and returns data on search value
   app.post("/api/newsData", function (req, res) {
     // console.log("Sohail's Body", req.body);
     newsapi.v2.everything({
